@@ -24,14 +24,15 @@ FECHACOMENTARIO [*/]
 
 /* REGRAS DE TRADUCAO */
 
-int    { return(INT); }
+int    { return(INT);}
 double { return(DOUBLE);}
 "*"    { return('*');}
 "{"    { return('{');}
 "}"    { return('}');}
 "<"    { return(MENOR);}
 ">"    { return(MAIOR);}
-"="    { return(IGUAL);}
+"="   { return(ATRIBUICAO);}
+"=="    { return(IGUAL);}
 if     { return(IF);}
 [ \n]+ { printf("BRANCO\n"); }
 
