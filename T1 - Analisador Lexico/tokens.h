@@ -3,9 +3,19 @@
 #define DOUBLE 261
 #define FLOAT 262
 #define CHAR 263
-#define TIPO_VARIAVEL 264
-#define ABRE_CHAVE 265
-#define FECHA_CHAVE 266
+#define BOOL 264
+
+#define IF  265
+#define ELSE  266
+#define WHILE  267
+#define FOR  268
+#define PRINTF  269
+
+
+
+
+
+
 
 #define IDF 300
 #define INT_LIT 301
