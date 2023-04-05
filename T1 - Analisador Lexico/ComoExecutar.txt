@@ -5,4 +5,4 @@ Como executar:
 
 2. gcc lex.yy.c -o analisador
 
-3. ./analisador < algoritmoteste
+3. ./analisador < algoritmoteste.txt
