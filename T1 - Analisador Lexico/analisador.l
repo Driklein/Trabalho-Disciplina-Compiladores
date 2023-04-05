@@ -9,9 +9,10 @@
 
 
 LETRA [a-zA-Z]
-DIGITO [0-9]
-PALAVRA [a-zA-Z][a-zA-Z]*
 VARIAVEL [a-zA-Z][a-zA-Z0-9]*
+DIGITO [0-9]
+NUMERO {DIGITO}+
+PALAVRA {LETRA}+
 ABRE_CHAVES [{]
 FECHA_CHAVES [}]
 ABRE_PARENTESES [(]
@@ -54,6 +55,7 @@ stdio.h {printf("[%s] -> BIBLIOTECA \n", yytext);}
 "[" {printf("[%s] -> ABRE_COLCHETE \n", yytext);}
 "]" {printf("[%s] -> FECHA_COLCHETE \n", yytext);}
 "." {printf("[%s] -> PONTO \n", yytext);}
+"," {printf("[%s] -> VIRGULA \n", yytext);}
 ";" {printf("[%s] -> PONTO_VIRGULA \n", yytext);}
 "\"" {printf("[%s] -> ASPA \n", yytext);}
 
@@ -76,7 +78,9 @@ stdio.h {printf("[%s] -> BIBLIOTECA \n", yytext);}
 
 
 {LETRA} {printf("[%s] -> LETRA \n", yytext);}
+{PALAVRA} {printf("[%s] -> PALAVRA \n", yytext);}
 {DIGITO} {printf("[%s] -> DIGITO \n", yytext);}
+{NUMERO} {printf("[%s] -> NUMERO \n", yytext);}
 {VARIAVEL} {printf("[%s] -> VARIAVEL \n", yytext);}
 {ASPA}{PALAVRA}+{ASPA} {printf("[%s] -> TEXTO \n", yytext);}
 {ESPACO} {printf("[%s] -> ESPACO \n", yytext);}
