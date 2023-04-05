@@ -11,12 +11,9 @@
 #define FOR  268
 #define PRINTF  269
 
+#define MAIN 270
+#define RETURN 271
+#define BIBLIOTECA 272
+#define INCLUDE 273
 
 
-
-
-
-
-#define IDF 300
-#define INT_LIT 301
-#define F_LIT 302

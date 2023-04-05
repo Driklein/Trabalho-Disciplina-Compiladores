@@ -77,7 +77,7 @@ stdio.h {printf("[%s] -> BIBLIOTECA \n", yytext);}
 {DIGITO} {printf("[%s] -> DIGITO \n", yytext);}
 {VARIAVEL} {printf("[%s] -> VARIAVEL \n", yytext);}
 {ASPA}{PALAVRA}+{ASPA} {printf("[%s] -> TEXTO \n", yytext);}
-
+{ESPACO} {printf("[%s] -> ESPACO \n", yytext);}
 
 %%
 
