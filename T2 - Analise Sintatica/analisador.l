@@ -2,9 +2,13 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include "tokens.h"
+
+    #define YY_USER_ACTION yylloc.first_line = yylineno;
+    #define YY_USER_INIT yylineno = 1;
+    
 %}
 
-
+%option yylineno
 %option noyywrap
 
 
@@ -28,68 +32,63 @@ ASPA ["]
 %%
 
 
-int {printf("[%s] -> INT \n", yytext);}
-double {printf("[%s] -> DOUBLE \n", yytext);}
-float {printf("[%s] -> FLOAT \n", yytext);}
-char {printf("[%s] -> CHAR \n", yytext);}
-bool {printf("[%s] -> BOOL \n", yytext);}
+int {return(INT);}
+double {return(double);}
+float {return(FLOAT);}
+char {return(CHAR);}
+bool {return(BOOL);}
 
 
-if {printf("[%s] -> IF \n", yytext);}
-else {printf("[%s] -> ELSE \n", yytext);}
-while {printf("[%s] -> WHILE \n", yytext);}
-for {printf("[%s] -> FOR \n", yytext);}
-printf {printf("[%s] -> PRINTF \n", yytext);}
+if {return(IF);}
+else {return(ELSE);}
+while {return(WHILE);}
+for {return(FOR);}
+printf {return(PRINTF);}
 
 
-main {printf("[%s] -> MAIN \n", yytext);}
-return {printf("[%s] -> RETURN \n", yytext);}
-stdio.h {printf("[%s] -> BIBLIOTECA \n", yytext);}
-#include {printf("[%s] -> INCLUDE \n", yytext);}
+main {return(MAIN);}
+return {return(RETURN);}
+stdio.h {return(BIBLIOTECA);}
+#include {return(INCLUDE);}
 
 
-"{" {printf("[%s] -> ABRE_CHAVE \n", yytext);}
-"}" {printf("[%s] -> FECHA_CHAVE \n", yytext);}
-"(" {printf("[%s] -> ABRE_PARENTESE \n", yytext);}
-")" {printf("[%s] -> FECHA_PARENTESE \n", yytext);}
-"[" {printf("[%s] -> ABRE_COLCHETE \n", yytext);}
-"]" {printf("[%s] -> FECHA_COLCHETE \n", yytext);}
-"." {printf("[%s] -> PONTO \n", yytext);}
-"," {printf("[%s] -> VIRGULA \n", yytext);}
-";" {printf("[%s] -> PONTO_VIRGULA \n", yytext);}
-"\"" {printf("[%s] -> ASPA \n", yytext);}
+"{" {return(ABRE_CHAVE);}
+"}" {return(FECHA_CHAVE);}
+"(" {return(ABRE_PARENTESE);}
+")" {return(FECHA_PARENTESE);}
+"[" {return(ABRE_COLCHETE);}
+"]" {return(FECHA_COLCHETE);}
+"." {return(PONTO);}
+"," {return(VIRGULA);}
+";" {return(PONTO_VIRGULA);}
+"\"" {return(ASPA);}
 
 
-"*" {printf("[%s] -> MULTIPLICACAO \n", yytext);}
-"+" {printf("[%s] -> SOMA \n", yytext);}
-"-" {printf("[%s] -> SUBTRACAO \n", yytext);}
-"/" {printf("[%s] -> DIVISAO \n", yytext);}
-"%" {printf("[%s] -> PORCENTAGEM \n", yytext);}
-"=" {printf("[%s] -> ATRIBUICAO \n", yytext);}
-"==" {printf("[%s] -> IGUAL \n", yytext);}
-"!=" {printf("[%s] -> DIFERENTE \n", yytext);}
-"!" {printf("[%s] -> NEGACAO \n", yytext);}
-">" {printf("[%s] -> MAIOR \n", yytext);}
-"<" {printf("[%s] -> MENOR \n", yytext);}
-">=" {printf("[%s] -> MAIOR_IGUAL \n", yytext);}
-"<=" {printf("[%s] -> MENOR_IGUAL \n", yytext);}
-"&&" {printf("[%s] -> AND \n", yytext);}
-"||" {printf("[%s] -> OR \n", yytext);}
+"*" {return(MULTIPLICACAO);}
+"+" {return(SOMA);}
+"-" {return(SUBTRACAO);}
+"/" {return(DIVISAO);}
+"%" {return(PORCENTAGEM);}
+"=" {return(ATRIBUICAO);}
+"==" {return(IGUAL);}
+"!=" {return(DIFERENTE);}
+"!" {return(NEGACAO);}
+">" {return(MAIOR);}
+"<" {return(MENOR);}
+">=" {return(MAIOR_IGUAL);}
+"<=" {return(MENOR_IGUAL);}
+"&&" {return(AND);}
+"||" {return(OR);}
 
 
-{LETRA} {printf("[%s] -> LETRA \n", yytext);}
-{PALAVRA} {printf("[%s] -> PALAVRA \n", yytext);}
-{DIGITO} {printf("[%s] -> DIGITO \n", yytext);}
-{NUMERO} {printf("[%s] -> NUMERO \n", yytext);}
-{VARIAVEL} {printf("[%s] -> VARIAVEL \n", yytext);}
-{ASPA}{PALAVRA}+{ASPA} {printf("[%s] -> TEXTO \n", yytext);}
-{ESPACO} {printf("[%s] -> ESPACO \n", yytext);}
+{LETRA} {return(LETRA);}
+{PALAVRA} {return(PALAVRA);}
+{DIGITO} {return(DIGITO);}
+{NUMERO} {return(NUMERO);}
+{VARIAVEL} {return(VARIAVEL);}
+{ASPA}{PALAVRA}+{ASPA} {return(TEXTO);}
+{ESPACO} {return(ESPACO);}
 
 
 %%
 
-
-int main(){
-    yylex();
-    return 0;
-}
