@@ -1,8 +1,0 @@
-
-Como executar:
-
-1. flex analisador.l
-
-2. gcc lex.yy.c -o analisador
-
-3. ./analisador < algoritmoteste.txt
