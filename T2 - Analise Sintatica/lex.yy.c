@@ -262,11 +262,15 @@ static void yy_flex_free YY_PROTO(( void * ));
 #define YY_AT_BOL() (yy_current_buffer->yy_at_bol)
 
 
+#define YY_USES_REJECT
+
 #define yywrap() 1
 #define YY_SKIP_YYWRAP
 typedef unsigned char YY_CHAR;
 FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;
 typedef int yy_state_type;
+extern int yylineno;
+int yylineno = 1;
 extern char *yytext;
 #define yytext_ptr yytext
 
@@ -287,20 +291,48 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 
 #define YY_NUM_RULES 47
 #define YY_END_OF_BUFFER 48
-static yyconst short int yy_accept[110] =
+static yyconst short int yy_acclist[218] =
     {   0,
-        0,    0,   48,   47,   46,   33,   24,   47,   29,   47,
-       17,   18,   25,   26,   22,   27,   21,   28,   42,   23,
-       35,   30,   34,   40,   19,   20,   40,   40,   40,   40,
-       40,   40,   40,   40,   40,   40,   40,   15,   47,   16,
-       32,    0,    0,   38,   43,   37,   31,   36,   44,   41,
-       41,   41,   41,   41,   41,   41,    6,   41,   41,   41,
-       41,   41,   41,   39,   45,    0,   41,   41,   41,   41,
-       41,    9,    1,   41,   41,   41,   41,   41,    0,    5,
-        4,   41,    7,   41,   11,   41,   41,   41,   41,    0,
-       41,    3,   41,   41,   41,    8,    0,    2,   10,   12,
+       48,   47,   46,   47,   33,   47,   24,   47,   47,   29,
+       47,   47,   17,   47,   18,   47,   25,   47,   26,   47,
+       22,   47,   27,   47,   21,   47,   28,   47,   42,   43,
+       47,   23,   47,   35,   47,   30,   47,   34,   47,   40,
+       41,   44,   47,   19,   47,   20,   47,   40,   41,   44,
+       47,   40,   41,   44,   47,   40,   41,   44,   47,   40,
+       41,   44,   47,   40,   41,   44,   47,   40,   41,   44,
+       47,   40,   41,   44,   47,   40,   41,   44,   47,   40,
+       41,   44,   47,   40,   41,   44,   47,   40,   41,   44,
+       47,   15,   47,   47,   16,   47,   32,   38,   43,   37,
 
-        0,   44,   41,    0,   13,   13,   13,   14,    0
+       31,   36,   44,   41,   44,   41,   44,   41,   44,   41,
+       44,   41,   44,   41,   44,   41,   44,    6,   41,   44,
+       41,   44,   41,   44,   41,   44,   41,   44,   41,   44,
+       41,   44,   39,   45,   41,   44,   41,   44,   41,   44,
+       41,   44,   41,   44,    9,   41,   44,    1,   41,   44,
+       41,   44,   41,   44,   41,   44,   41,   44,   41,   44,
+        5,   41,   44,    4,   41,   44,   41,   44,    7,   41,
+       44,   41,   44,   11,   41,   44,   41,   44,   41,   44,
+       41,   44,   41,   44,   41,   44,    3,   41,   44,   41,
+       44,   41,   44,   41,   44,    8,   41,   44,    2,   41,
+
+       44,   10,   41,   44,   12,   41,   44,   44,   41,   44,
+       13,   13,   44,   13,   41,   44,   14
+    } ;
+
+static yyconst short int yy_accept[111] =
+    {   0,
+        1,    1,    1,    2,    3,    5,    7,    9,   10,   12,
+       13,   15,   17,   19,   21,   23,   25,   27,   29,   32,
+       34,   36,   38,   40,   44,   46,   48,   52,   56,   60,
+       64,   68,   72,   76,   80,   84,   88,   92,   94,   95,
+       97,   98,   98,   98,   99,  100,  101,  102,  103,  104,
+      106,  108,  110,  112,  114,  116,  118,  121,  123,  125,
+      127,  129,  131,  133,  134,  135,  135,  137,  139,  141,
+      143,  145,  148,  151,  153,  155,  157,  159,  161,  161,
+      164,  167,  169,  172,  174,  177,  179,  181,  183,  185,
+      185,  187,  190,  192,  194,  196,  199,  199,  202,  205,
+
+      208,  208,  209,  211,  211,  212,  214,  217,  218,  218
     } ;
 
 static yyconst int yy_ec[256] =
@@ -444,13 +476,16 @@ static yyconst short int yy_chk[263] =
       109,  109
     } ;
 
-static yy_state_type yy_last_accepting_state;
-static char *yy_last_accepting_cpos;
-
-/* The intent behind this definition is that it'll catch
- * any uses of REJECT which flex missed.
- */
-#define REJECT reject_used_but_not_detected
+static yy_state_type yy_state_buf[YY_BUF_SIZE + 2], *yy_state_ptr;
+static char *yy_full_match;
+static int yy_lp;
+#define REJECT \
+{ \
+*yy_cp = yy_hold_char; /* undo effects of setting up yytext */ \
+yy_cp = yy_full_match; /* restore poss. backed-over text */ \
+++yy_lp; \
+goto find_rule; \
+}
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
@@ -461,7 +496,12 @@ char *yytext;
     #include <stdio.h>
     #include <stdlib.h>
     #include "tokens.h"
-#line 465 "lex.yy.c"
+    #include "y.tab.h"
+
+    #define YY_USER_ACTION yylloc.first_line = yylineno;
+    #define YY_USER_INIT yylineno = 1;
+    
+#line 505 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -612,11 +652,11 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 28 "analisador.l"
+#line 33 "analisador.l"
 
 
 
-#line 620 "lex.yy.c"
+#line 660 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -655,15 +695,12 @@ YY_DECL
 		yy_bp = yy_cp;
 
 		yy_current_state = yy_start;
+		yy_state_ptr = yy_state_buf;
+		*yy_state_ptr++ = yy_current_state;
 yy_match:
 		do
 			{
 			register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];
-			if ( yy_accept[yy_current_state] )
-				{
-				yy_last_accepting_state = yy_current_state;
-				yy_last_accepting_cpos = yy_cp;
-				}
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
@@ -671,272 +708,283 @@ yy_match:
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
+			*yy_state_ptr++ = yy_current_state;
 			++yy_cp;
 			}
 		while ( yy_base[yy_current_state] != 217 );
 
 yy_find_action:
-		yy_act = yy_accept[yy_current_state];
-		if ( yy_act == 0 )
-			{ /* have to back up */
-			yy_cp = yy_last_accepting_cpos;
-			yy_current_state = yy_last_accepting_state;
-			yy_act = yy_accept[yy_current_state];
+		yy_current_state = *--yy_state_ptr;
+		yy_lp = yy_accept[yy_current_state];
+find_rule: /* we branch to this label when backing up */
+		for ( ; ; ) /* until we find what rule we matched */
+			{
+			if ( yy_lp && yy_lp < yy_accept[yy_current_state + 1] )
+				{
+				yy_act = yy_acclist[yy_lp];
+					{
+					yy_full_match = yy_cp;
+					break;
+					}
+				}
+			--yy_cp;
+			yy_current_state = *--yy_state_ptr;
+			yy_lp = yy_accept[yy_current_state];
 			}
 
 		YY_DO_BEFORE_ACTION;
 
+		if ( yy_act != YY_END_OF_BUFFER )
+			{
+			int yyl;
+			for ( yyl = 0; yyl < yyleng; ++yyl )
+				if ( yytext[yyl] == '\n' )
+					++yylineno;
+			}
 
 do_action:	/* This label is used only to access EOF actions. */
 
 
 		switch ( yy_act )
 	{ /* beginning of action switch */
-			case 0: /* must back up */
-			/* undo the effects of YY_DO_BEFORE_ACTION */
-			*yy_cp = yy_hold_char;
-			yy_cp = yy_last_accepting_cpos;
-			yy_current_state = yy_last_accepting_state;
-			goto yy_find_action;
-
 case 1:
 YY_RULE_SETUP
-#line 31 "analisador.l"
-{printf("[%s] -> INT \n", yytext);}
+#line 36 "analisador.l"
+{return(INT);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 32 "analisador.l"
-{printf("[%s] -> DOUBLE \n", yytext);}
+#line 37 "analisador.l"
+{return(DOUBLE);}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 33 "analisador.l"
-{printf("[%s] -> FLOAT \n", yytext);}
+#line 38 "analisador.l"
+{return(FLOAT);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 34 "analisador.l"
-{printf("[%s] -> CHAR \n", yytext);}
+#line 39 "analisador.l"
+{return(CHAR);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 35 "analisador.l"
-{printf("[%s] -> BOOL \n", yytext);}
+#line 40 "analisador.l"
+{return(BOOL);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 38 "analisador.l"
-{printf("[%s] -> IF \n", yytext);}
+#line 43 "analisador.l"
+{return(IF);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 39 "analisador.l"
-{printf("[%s] -> ELSE \n", yytext);}
+#line 44 "analisador.l"
+{return(ELSE);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 40 "analisador.l"
-{printf("[%s] -> WHILE \n", yytext);}
+#line 45 "analisador.l"
+{return(WHILE);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 41 "analisador.l"
-{printf("[%s] -> FOR \n", yytext);}
+#line 46 "analisador.l"
+{return(FOR);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 42 "analisador.l"
-{printf("[%s] -> PRINTF \n", yytext);}
+#line 47 "analisador.l"
+{return(PRINTF);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 45 "analisador.l"
-{printf("[%s] -> MAIN \n", yytext);}
+#line 50 "analisador.l"
+{return(MAIN);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 46 "analisador.l"
-{printf("[%s] -> RETURN \n", yytext);}
+#line 51 "analisador.l"
+{return(RETURN);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 47 "analisador.l"
-{printf("[%s] -> BIBLIOTECA \n", yytext);}
+#line 52 "analisador.l"
+{return(BIBLIOTECA);}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 48 "analisador.l"
-{printf("[%s] -> INCLUDE \n", yytext);}
+#line 53 "analisador.l"
+{return(INCLUDE);}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 51 "analisador.l"
-{printf("[%s] -> ABRE_CHAVE \n", yytext);}
+#line 56 "analisador.l"
+{return(ABRE_CHAVE);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 52 "analisador.l"
-{printf("[%s] -> FECHA_CHAVE \n", yytext);}
+#line 57 "analisador.l"
+{return(FECHA_CHAVE);}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 53 "analisador.l"
-{printf("[%s] -> ABRE_PARENTESE \n", yytext);}
+#line 58 "analisador.l"
+{return(ABRE_PARENTESE);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 54 "analisador.l"
-{printf("[%s] -> FECHA_PARENTESE \n", yytext);}
+#line 59 "analisador.l"
+{return(FECHA_PARENTESE);}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 55 "analisador.l"
-{printf("[%s] -> ABRE_COLCHETE \n", yytext);}
+#line 60 "analisador.l"
+{return(ABRE_COLCHETE);}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 56 "analisador.l"
-{printf("[%s] -> FECHA_COLCHETE \n", yytext);}
+#line 61 "analisador.l"
+{return(FECHA_COLCHETE);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 57 "analisador.l"
-{printf("[%s] -> PONTO \n", yytext);}
+#line 62 "analisador.l"
+{return(PONTO);}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 58 "analisador.l"
-{printf("[%s] -> VIRGULA \n", yytext);}
+#line 63 "analisador.l"
+{return(VIRGULA);}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 59 "analisador.l"
-{printf("[%s] -> PONTO_VIRGULA \n", yytext);}
+#line 64 "analisador.l"
+{return(PONTO_VIRGULA);}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 60 "analisador.l"
-{printf("[%s] -> ASPA \n", yytext);}
+#line 65 "analisador.l"
+{return(ASPA);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 63 "analisador.l"
-{printf("[%s] -> MULTIPLICACAO \n", yytext);}
+#line 68 "analisador.l"
+{return(MULTIPLICACAO);}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 64 "analisador.l"
-{printf("[%s] -> SOMA \n", yytext);}
+#line 69 "analisador.l"
+{return(SOMA);}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 65 "analisador.l"
-{printf("[%s] -> SUBTRACAO \n", yytext);}
+#line 70 "analisador.l"
+{return(SUBTRACAO);}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 66 "analisador.l"
-{printf("[%s] -> DIVISAO \n", yytext);}
+#line 71 "analisador.l"
+{return(DIVISAO);}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 67 "analisador.l"
-{printf("[%s] -> PORCENTAGEM \n", yytext);}
+#line 72 "analisador.l"
+{return(PORCENTAGEM);}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 68 "analisador.l"
-{printf("[%s] -> ATRIBUICAO \n", yytext);}
+#line 73 "analisador.l"
+{return(ATRIBUICAO);}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 69 "analisador.l"
-{printf("[%s] -> IGUAL \n", yytext);}
+#line 74 "analisador.l"
+{return(IGUAL);}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 70 "analisador.l"
-{printf("[%s] -> DIFERENTE \n", yytext);}
+#line 75 "analisador.l"
+{return(DIFERENTE);}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 71 "analisador.l"
-{printf("[%s] -> NEGACAO \n", yytext);}
+#line 76 "analisador.l"
+{return(NEGACAO);}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 72 "analisador.l"
-{printf("[%s] -> MAIOR \n", yytext);}
+#line 77 "analisador.l"
+{return(MAIOR);}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 73 "analisador.l"
-{printf("[%s] -> MENOR \n", yytext);}
+#line 78 "analisador.l"
+{return(MENOR);}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 74 "analisador.l"
-{printf("[%s] -> MAIOR_IGUAL \n", yytext);}
+#line 79 "analisador.l"
+{return(MAIOR_IGUAL);}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 75 "analisador.l"
-{printf("[%s] -> MENOR_IGUAL \n", yytext);}
+#line 80 "analisador.l"
+{return(MENOR_IGUAL);}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 76 "analisador.l"
-{printf("[%s] -> AND \n", yytext);}
+#line 81 "analisador.l"
+{return(AND);}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 77 "analisador.l"
-{printf("[%s] -> OR \n", yytext);}
+#line 82 "analisador.l"
+{return(OR);}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 80 "analisador.l"
-{printf("[%s] -> LETRA \n", yytext);}
+#line 85 "analisador.l"
+{return(LETRA);}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 81 "analisador.l"
-{printf("[%s] -> PALAVRA \n", yytext);}
+#line 86 "analisador.l"
+{return(PALAVRA);}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 82 "analisador.l"
-{printf("[%s] -> DIGITO \n", yytext);}
+#line 87 "analisador.l"
+{return(DIGITO);}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 83 "analisador.l"
-{printf("[%s] -> NUMERO \n", yytext);}
+#line 88 "analisador.l"
+{return(NUMERO);}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 84 "analisador.l"
-{printf("[%s] -> VARIAVEL \n", yytext);}
+#line 89 "analisador.l"
+{return(VARIAVEL);}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 85 "analisador.l"
-{printf("[%s] -> TEXTO \n", yytext);}
+#line 90 "analisador.l"
+{return(TEXTO);}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 86 "analisador.l"
-{printf("[%s] -> ESPACO \n", yytext);}
+#line 91 "analisador.l"
+{return(ESPACO);}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 89 "analisador.l"
+#line 94 "analisador.l"
 ECHO;
 	YY_BREAK
-#line 938 "lex.yy.c"
-case YY_STATE_EOF(INITIAL):
-	yyterminate();
+#line 986 "lex.yy.c"
+			case YY_STATE_EOF(INITIAL):
+				yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1214,15 +1262,12 @@ static yy_state_type yy_get_previous_state()
 	register char *yy_cp;
 
 	yy_current_state = yy_start;
+	yy_state_ptr = yy_state_buf;
+	*yy_state_ptr++ = yy_current_state;
 
 	for ( yy_cp = yytext_ptr + YY_MORE_ADJ; yy_cp < yy_c_buf_p; ++yy_cp )
 		{
 		register YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);
-		if ( yy_accept[yy_current_state] )
-			{
-			yy_last_accepting_state = yy_current_state;
-			yy_last_accepting_cpos = yy_cp;
-			}
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
@@ -1230,6 +1275,7 @@ static yy_state_type yy_get_previous_state()
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
+		*yy_state_ptr++ = yy_current_state;
 		}
 
 	return yy_current_state;
@@ -1250,14 +1296,8 @@ yy_state_type yy_current_state;
 #endif
 	{
 	register int yy_is_jam;
-	register char *yy_cp = yy_c_buf_p;
 
 	register YY_CHAR yy_c = 1;
-	if ( yy_accept[yy_current_state] )
-		{
-		yy_last_accepting_state = yy_current_state;
-		yy_last_accepting_cpos = yy_cp;
-		}
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
@@ -1266,6 +1306,8 @@ yy_state_type yy_current_state;
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 	yy_is_jam = (yy_current_state == 109);
+	if ( ! yy_is_jam )
+		*yy_state_ptr++ = yy_current_state;
 
 	return yy_is_jam ? 0 : yy_current_state;
 	}
@@ -1308,6 +1350,8 @@ register char *yy_bp;
 
 	*--yy_cp = (char) c;
 
+	if ( c == '\n' )
+		--yylineno;
 
 	yytext_ptr = yy_bp;
 	yy_hold_char = *yy_cp;
@@ -1384,6 +1428,8 @@ static int input()
 	*yy_c_buf_p = '\0';	/* preserve yytext */
 	yy_hold_char = *++yy_c_buf_p;
 
+	if ( c == '\n' )
+		++yylineno;
 
 	return c;
 	}
@@ -1820,11 +1866,6 @@ int main()
 	return 0;
 	}
 #endif
-#line 89 "analisador.l"
+#line 94 "analisador.l"
 
 
-
-int main(){
-    yylex();
-    return 0;
-}

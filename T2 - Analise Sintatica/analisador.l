@@ -2,6 +2,7 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include "tokens.h"
+    #include "y.tab.h"
 
     #define YY_USER_ACTION yylloc.first_line = yylineno;
     #define YY_USER_INIT yylineno = 1;
@@ -33,7 +34,7 @@ ASPA ["]
 
 
 int {return(INT);}
-double {return(double);}
+double {return(DOUBLE);}
 float {return(FLOAT);}
 char {return(CHAR);}
 bool {return(BOOL);}

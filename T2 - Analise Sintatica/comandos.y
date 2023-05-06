@@ -5,6 +5,7 @@
    * final do parser. Sera copiado tal como esta no inicio do y.tab.c
    * gerado por Yacc.
    */
+
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include "node.h"
@@ -13,44 +14,64 @@
 	extern int yylex();
 
 	extern Node * syntax_tree;
-
 %}
 
 %union {
 	char* cadeia;
-	struct _node * no;
+	struct _node * node;
 }
 
-%left '-' '+'
-%left '*' '/'
-%left AND OR
-%right NOT
-
-%token<cadeia> IDF
 %token INT
 %token DOUBLE
-%token REAL
+%token FLOAT
+%token CHAR
+%token BOOL
 
-/* demais tokens ...*/
+%token IF
+%token ELSE
+%token WHILE
+%token FOR
+%token PRINTF
 
-%type<no> code
-%type<no> acoes
-%type<no> declaracoes
-%type<no> declaracao
+%token MAIN
+%token RETURN
+%token BIBLIOTECA
+%token INCLUDE
 
-/* demais types ... */
+%type<node> code
+%type<node> code_node
+%type<node> acao
+%type<node> acoes
+%type<node> declaracoes
+%type<node> declaracao
+%type<node> atribuicao
+%type<node> condicao
+%type<node> laco
+%type<node> comparacao
+
+%type<node> tipo
 
 %start code
 
  /* A completar com seus tokens - compilar com 'yacc -d' */
 
 %%
-code: declaracoes acoes {  $$ = create_node(@1.first_line, code_node, NULL, $1, $2, NULL); syntax_tree = $$;}
-    | acoes { $$ = $1; syntax_tree = $$;  }
-    ;
 
-/*demais codes ..*/
+code: declaracoes acoes {
+	  
+	$$ = create_node(@1.first_line, code_node, NULL, $1, $2, NULL); 
+	syntax_tree = $$;
+
+} | acoes {
+	$$ = $1; 
+	syntax_tree = $$;  
+};
+
+
+tipo: INT | CHAR | FLOAT;
+condicao: IF;
+laco: WHILE | FOR;
+
+
 
 %%
- /* A partir daqui, insere-se qlqer codigo C necessario.
-  */
