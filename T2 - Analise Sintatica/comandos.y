@@ -1,4 +1,3 @@
-%error-verbose
 
 %{
   /* Aqui, pode-se inserir qualquer codigo C necessario ah compilacao
@@ -21,7 +20,13 @@
 	struct _node * node;
 }
 
-%token INT
+%token<cadeia> INT
+
+%type<node> code
+
+/*
+
+
 %token DOUBLE
 %token FLOAT
 %token CHAR
@@ -38,7 +43,7 @@
 %token BIBLIOTECA
 %token INCLUDE
 
-%type<node> code
+
 %type<node> code_node
 %type<node> acao
 %type<node> acoes
@@ -49,7 +54,10 @@
 %type<node> laco
 %type<node> comparacao
 
+*/
+
 %type<node> tipo
+
 
 %start code
 
@@ -57,6 +65,17 @@
 
 %%
 
+code:tipo{
+
+	$$=create_node(@1.first_line, code_node, NULL, $1, NULL); 
+	syntax_tree = $$;
+};
+
+tipo: INT{
+	$$=$1;
+};
+
+/*
 code: declaracoes acoes {
 	  
 	$$ = create_node(@1.first_line, code_node, NULL, $1, $2, NULL); 
@@ -73,5 +92,6 @@ condicao: IF;
 laco: WHILE | FOR;
 
 
+*/
 
 %%
