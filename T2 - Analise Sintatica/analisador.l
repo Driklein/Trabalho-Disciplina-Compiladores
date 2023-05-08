@@ -2,7 +2,7 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include "tokens.h"
-    #include "y.tab.h"
+    #include "compilador.tab.h"
 
     #define YY_USER_ACTION yylloc.first_line = yylineno;
     #define YY_USER_INIT yylineno = 1;
@@ -82,13 +82,13 @@ stdio.h {return(BIBLIOTECA);}
 "||" {return(OR);}
 
 
-{LETRA} {return(LETRA);}
-{PALAVRA} {return(PALAVRA);}
-{DIGITO} {return(DIGITO);}
-{NUMERO} {return(NUMERO);}
-{VARIAVEL} {return(VARIAVEL);}
-{ASPA}{PALAVRA}+{ASPA} {return(TEXTO);}
-{ESPACO} {return(ESPACO);}
+{LETRA} {return(yytext);}
+{PALAVRA} {return(yytext);}
+{DIGITO} {return(yytext);}
+{NUMERO} {return(yytext);}
+{VARIAVEL} {return(yytext);}
+{ASPA}{PALAVRA}+{ASPA} {return(yytext);}
+{ESPACO} {return(yytext);}
 
 
 %%

@@ -32,8 +32,9 @@ typedef int Node_type;
 #define acao_node 507
 #define acoes_node 508
 #define atribuicao_node 509
-#define if_node 511
-#define while_node 512
+#define laco_node 511
+#define impressao_node 512
+
 
 
 /** Estrutura de dados parcial para o no da arvore. */
