@@ -21,6 +21,7 @@
 	struct _node * node;
 }
 
+%token INT
 %token DOUBLE
 %token FLOAT
 %token CHAR
@@ -61,17 +62,29 @@ code: acao{
 	syntax_tree = $$;
 };
 
-acao:{
+acao:{ 
 	$$ = create_node(1, code_node, NULL, $1, $2, NULL); }
 	| atribuicao code{$$ = create_node(@1.first_line, atribuicao_node, NULL, $1, $2, NULL); }
 	| condicao code{$$ = create_node(@1.first_line, condicao_node, NULL, $1, $2, NULL); }
 	| laco code{$$ = create_node(@1.first_line, laco_node, NULL, $1, $2, NULL); }
 	| impressao code{$$ = create_node(@1.first_line, impressao_node, NULL, $1, $2, NULL); };
 	
-atribuicao: VARIAVEL '=' expressao{ 
+atribuicao: VARIAVEL '=' expressao ; { 
 	Node* atribuicao = create_node(@1.first_line, code_node, NULL, $1, $1, NULL);
 	$$ = create_node(@1.first_line, atribuicao_node, "=", atribuicao, $3, NULL);  };
 
+tipo: INT {$$ = create_node(@1.first_line, int_node, $1, NULL);}
+	| FLOAT {$$ = create_node(@1.first_line, float_node, $1, NULL);}
+	| CHAR {$$ = create_node(@1.first_line, char_node, $1, NULL);}
+	| BOOL {$$ = create_node(@1.first_line, int_node, $1, NULL);};
+
+
+expressao: expressao '+' tipo {$$ = create_node(@1.first_line, soma_node,"+", $1, $3, NULL);}
+		|  expressao '-' tipo {$$ = create_node(@1.first_line, subtracao_node,"+", $1, $3, NULL);}
+		|  expressao '*' tipo {$$ = create_node(@1.first_line, multiplicacao_node,"*", $1, $3, NULL);}
+		|  expressao '/' tipo {$$ = create_node(@1.first_line, divisao_node,"/", $1, $3, NULL);}
+		|  expressao{$$ = $2;}
+		|  tipo{$$ = $3;};
 
 
 */

@@ -34,6 +34,12 @@ typedef int Node_type;
 #define atribuicao_node 509
 #define laco_node 511
 #define impressao_node 512
+#define soma_node 513
+#define subtracao_node 514
+#define divisao_node 515
+#define multiplicacao_node 516
+
+
 
 
 
