@@ -55,7 +55,7 @@
 %%
 
 
-/*
+
 code: acao{
 	  
 	$$ = create_node(@1.first_line, code_node, NULL, $1, $2, NULL); 
@@ -69,7 +69,7 @@ acao:{
 	| laco code{$$ = create_node(@1.first_line, laco_node, NULL, $1, $2, NULL); }
 	| impressao code{$$ = create_node(@1.first_line, impressao_node, NULL, $1, $2, NULL); };
 	
-atribuicao: VARIAVEL '=' expressao ; { 
+atribuicao: VARIAVEL '=' expressao ';' { 
 	Node* atribuicao = create_node(@1.first_line, code_node, NULL, $1, $1, NULL);
 	$$ = create_node(@1.first_line, atribuicao_node, "=", atribuicao, $3, NULL);  };
 
@@ -87,6 +87,6 @@ expressao: expressao '+' tipo {$$ = create_node(@1.first_line, soma_node,"+", $1
 		|  tipo{$$ = $3;};
 
 
-*/
+
 
 %%
