@@ -38,9 +38,12 @@ typedef int Node_type;
 #define subtracao_node 514
 #define divisao_node 515
 #define multiplicacao_node 516
+#define variavel_node 517
+#define pontoevirgula_node 518
+#define expressao_node 519
 
 
-
+#define igual_node 520
 
 
 /** Estrutura de dados parcial para o no da arvore. */
