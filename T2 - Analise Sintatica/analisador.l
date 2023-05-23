@@ -29,9 +29,7 @@ FECHA_COMENTARIO [*/]
 ESPACO [ ]
 ASPA ["]
 
-
 %%
-
 
 int {return(INT);}
 double {return(DOUBLE);}
