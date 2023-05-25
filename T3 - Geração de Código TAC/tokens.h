@@ -15,5 +15,6 @@
 #define RETURN 271
 #define BIBLIOTECA 272
 #define INCLUDE 273
+#define VARIAVEL 274
 
 

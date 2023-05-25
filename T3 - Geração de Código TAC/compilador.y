@@ -38,15 +38,18 @@
 %token BIBLIOTECA
 %token INCLUDE
 
+%token VARIAVEL
+
+
 %type<node> code
 %type<node> acao
 %type<node> atribuicao
 %type<node> expressao
+%type<node> tipo
 
 /*
 %type<node> condicao
 %type<node> laco
-%type<node> tipo
 %type<node> impressao
 */
 
@@ -63,7 +66,8 @@
 
 
 
-code: acao ';'{
+code: 
+	acao ';'{
 	Node* pontoevirgula = create_node(@1.first_line,pontoevirgula_node,';',NULL);
 	$$ = create_node(@1.first_line, code_node, NULL, $1, pontoevirgula, NULL); 
 	syntax_tree = $$;
@@ -80,19 +84,22 @@ acao:{
 */
 
 
-atribuicao: VARIAVEL '=' expressao {
+atribuicao: 
+	VARIAVEL '=' expressao {
 	Node* variavel = create_node(@1.first_line,variavel_node, "VARIAVEL", NULL);
 	Node* igual = create_node(@1.first_line,igual_node,'=',NULL);
 	$$ = create_node(@1.first_line, atribuicao_node, NULL, variavel, igual, $3, NULL);  };
 
 
-tipo: INT {$$ = create_node(@1.first_line, int_node, $1, NULL);}
-	| FLOAT {$$ = create_node(@1.first_line, float_node, $1, NULL);}
-	| CHAR {$$ = create_node(@1.first_line, char_node, $1, NULL);}
-	| BOOL {$$ = create_node(@1.first_line, int_node, $1, NULL);};
+tipo: 
+	  INT {$$ = create_node(@1.first_line, int_node, NULL, NULL );}
+	| FLOAT {$$ = create_node(@1.first_line, float_node, NULL, NULL );}
+	| CHAR {$$ = create_node(@1.first_line, char_node, NULL, NULL );}
+	| BOOL {$$ = create_node(@1.first_line, int_node, NULL, NULL );};
 
 
-expressao: expressao '+' expressao {
+expressao: 
+		expressao '+' expressao {			
 		Node* soma = create_node(@1.first_line, soma_node,'+',NULL);
 		$$ = create_node(@1.first_line, expressao_node, NULL, $1, soma, $3, NULL);}
 
@@ -108,8 +115,7 @@ expressao: expressao '+' expressao {
 		Node* multiplicacao = create_node(@1.first_line, multiplicacao_node,'+', NULL);
 		$$ = create_node(@1.first_line, expressao_node, NULL, $1, multiplicacao, $3, NULL);}
 
-
-		expressao '+' tipo {
+		|  expressao '+' tipo {
 		Node* soma = create_node(@1.first_line, soma_node,'+',NULL);
 		$$ = create_node(@1.first_line, expressao_node, NULL, $1, soma, $3, NULL);}
 
