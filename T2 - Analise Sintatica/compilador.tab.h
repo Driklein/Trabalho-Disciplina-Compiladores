@@ -49,7 +49,21 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    INT = 258
+    INT = 258,
+    DOUBLE = 259,
+    FLOAT = 260,
+    CHAR = 261,
+    BOOL = 262,
+    IF = 263,
+    ELSE = 264,
+    WHILE = 265,
+    FOR = 266,
+    PRINTF = 267,
+    MAIN = 268,
+    RETURN = 269,
+    BIBLIOTECA = 270,
+    INCLUDE = 271,
+    VARIAVEL = 272
   };
 #endif
 
@@ -57,12 +71,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 18 "compilador.y"
+#line 19 "compilador.y"
 
 	char* cadeia;
 	struct _node * node;
 
-#line 66 "compilador.tab.h"
+#line 80 "compilador.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
