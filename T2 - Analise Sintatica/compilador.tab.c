@@ -492,18 +492,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  3
+#define YYFINAL  6
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   1
+#define YYLAST   21
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  24
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  3
+#define YYNNTS  6
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  3
+#define YYNRULES  18
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  5
+#define YYNSTATES  27
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   272
@@ -550,9 +550,10 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_int8 yyrline[] =
+static const yytype_uint8 yyrline[] =
 {
-       0,    70,    70,    76
+       0,    70,    70,    76,    77,    87,    94,    95,    96,    97,
+     101,   105,   109,   113,   117,   121,   125,   129,   133
 };
 #endif
 
@@ -564,7 +565,7 @@ static const char *const yytname[] =
   "$end", "error", "$undefined", "INT", "DOUBLE", "FLOAT", "CHAR", "BOOL",
   "IF", "ELSE", "WHILE", "FOR", "PRINTF", "MAIN", "RETURN", "BIBLIOTECA",
   "INCLUDE", "VARIAVEL", "';'", "'='", "'+'", "'-'", "'/'", "'*'",
-  "$accept", "code", "acao", YY_NULLPTR
+  "$accept", "code", "acao", "atribuicao", "tipo", "expressao", YY_NULLPTR
 };
 #endif
 
@@ -579,7 +580,7 @@ static const yytype_int16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF (-18)
+#define YYPACT_NINF (-17)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -593,7 +594,9 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -18,     0,   -17,   -18,   -18
+     -16,    -6,    18,     1,   -16,     4,   -17,   -17,   -17,   -17,
+     -15,    -3,    -3,    -3,    -3,   -17,   -17,   -17,   -17,   -17,
+     -15,   -17,   -15,   -17,   -15,   -17,   -15
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -601,19 +604,21 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       3,     0,     0,     1,     2
+       0,     0,     0,     0,     3,     0,     1,     2,     4,    18,
+       5,     0,     0,     0,     0,     6,     7,     8,     9,    14,
+      10,    15,    11,    16,    12,    17,    13
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -18,   -18,   -18
+     -17,    16,   -17,   -17,     3,    -2
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     1,     2
+      -1,     2,     3,     4,    19,    10
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -621,31 +626,39 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       3,     4
+      15,     1,    16,    17,    18,    11,    12,    13,    14,    20,
+      22,    24,    26,     5,     9,    21,    23,    25,     6,     7,
+       8,     9
 };
 
 static const yytype_int8 yycheck[] =
 {
-       0,    18
+       3,    17,     5,     6,     7,    20,    21,    22,    23,    11,
+      12,    13,    14,    19,    17,    12,    13,    14,     0,    18,
+       4,    17
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    25,    26,     0,    18
+       0,    17,    25,    26,    27,    19,     0,    18,    25,    17,
+      29,    20,    21,    22,    23,     3,     5,     6,     7,    28,
+      29,    28,    29,    28,    29,    28,    29
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    24,    25,    26
+       0,    24,    25,    26,    26,    27,    28,    28,    28,    28,
+      29,    29,    29,    29,    29,    29,    29,    29,    29
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     2,     0
+       0,     2,     2,     1,     2,     3,     1,     1,     1,     1,
+       3,     3,     3,     3,     3,     3,     3,     3,     1
 };
 
 
@@ -1442,18 +1455,126 @@ yyreduce:
 	(yyval.node) = create_node((yylsp[-1]).first_line, code_node, NULL, (yyvsp[-1].node), pontoevirgula, NULL); 
 	syntax_tree = (yyval.node);
 }
-#line 1446 "compilador.tab.c"
+#line 1459 "compilador.tab.c"
     break;
 
   case 3:
 #line 76 "compilador.y"
-     { 
-	(yyval.node) = create_node(1, code_node, NULL, NULL); }
-#line 1453 "compilador.tab.c"
+                { (yyval.node) = create_node((yylsp[0]).first_line, atribuicao_node, NULL, (yyvsp[0].node), NULL); }
+#line 1465 "compilador.tab.c"
+    break;
+
+  case 4:
+#line 77 "compilador.y"
+                         {(yyval.node) = create_node((yylsp[-1]).first_line, atribuicao_node, NULL, (yyvsp[-1].node), (yyvsp[0].node), NULL); }
+#line 1471 "compilador.tab.c"
+    break;
+
+  case 5:
+#line 87 "compilador.y"
+                               {
+	Node* variavel = create_node((yylsp[-2]).first_line,variavel_node, yylval.cadeia, NULL);
+	Node* igual = create_node((yylsp[-2]).first_line,igual_node,"=",NULL);
+	(yyval.node) = create_node((yylsp[-2]).first_line, atribuicao_node, NULL, variavel, igual, (yyvsp[0].node), NULL);  }
+#line 1480 "compilador.tab.c"
+    break;
+
+  case 6:
+#line 94 "compilador.y"
+              {(yyval.node) = create_node((yylsp[0]).first_line, int_node, NULL, NULL );}
+#line 1486 "compilador.tab.c"
+    break;
+
+  case 7:
+#line 95 "compilador.y"
+                {(yyval.node) = create_node((yylsp[0]).first_line, float_node, NULL, NULL );}
+#line 1492 "compilador.tab.c"
+    break;
+
+  case 8:
+#line 96 "compilador.y"
+               {(yyval.node) = create_node((yylsp[0]).first_line, char_node, NULL, NULL );}
+#line 1498 "compilador.tab.c"
+    break;
+
+  case 9:
+#line 97 "compilador.y"
+               {(yyval.node) = create_node((yylsp[0]).first_line, int_node, NULL, NULL );}
+#line 1504 "compilador.tab.c"
+    break;
+
+  case 10:
+#line 101 "compilador.y"
+                                        {			
+		Node* soma = create_node((yylsp[-2]).first_line, soma_node,"+",NULL);
+		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), soma, (yyvsp[0].node), NULL);}
+#line 1512 "compilador.tab.c"
+    break;
+
+  case 11:
+#line 105 "compilador.y"
+                                           {
+		Node* subtracao = create_node((yylsp[-2]).first_line, subtracao_node,"-", NULL);
+		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), subtracao, (yyvsp[0].node), NULL);}
+#line 1520 "compilador.tab.c"
+    break;
+
+  case 12:
+#line 109 "compilador.y"
+                                           {
+		Node* divisao = create_node((yylsp[-2]).first_line, divisao_node,"/", NULL);
+		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), divisao, (yyvsp[0].node), NULL);}
+#line 1528 "compilador.tab.c"
+    break;
+
+  case 13:
+#line 113 "compilador.y"
+                                           {
+		Node* multiplicacao = create_node((yylsp[-2]).first_line, multiplicacao_node,"+", NULL);
+		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), multiplicacao, (yyvsp[0].node), NULL);}
+#line 1536 "compilador.tab.c"
+    break;
+
+  case 14:
+#line 117 "compilador.y"
+                                      {
+		Node* soma = create_node((yylsp[-2]).first_line, soma_node,"+",NULL);
+		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), soma, (yyvsp[0].node), NULL);}
+#line 1544 "compilador.tab.c"
+    break;
+
+  case 15:
+#line 121 "compilador.y"
+                                      {
+		Node* subtracao = create_node((yylsp[-2]).first_line, subtracao_node,"-", NULL);
+		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), subtracao, (yyvsp[0].node), NULL);}
+#line 1552 "compilador.tab.c"
+    break;
+
+  case 16:
+#line 125 "compilador.y"
+                                      {
+		Node* divisao = create_node((yylsp[-2]).first_line, divisao_node,"/", NULL);
+		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), divisao, (yyvsp[0].node), NULL);}
+#line 1560 "compilador.tab.c"
+    break;
+
+  case 17:
+#line 129 "compilador.y"
+                                      {
+		Node* multiplicacao = create_node((yylsp[-2]).first_line, multiplicacao_node,"+", NULL);
+		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), multiplicacao, (yyvsp[0].node), NULL);}
+#line 1568 "compilador.tab.c"
+    break;
+
+  case 18:
+#line 133 "compilador.y"
+                           {(yyval.node) = create_node((yylsp[0]).first_line, expressao_node, "VARIAVEL", NULL);}
+#line 1574 "compilador.tab.c"
     break;
 
 
-#line 1457 "compilador.tab.c"
+#line 1578 "compilador.tab.c"
 
       default: break;
     }
@@ -1691,5 +1812,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 141 "compilador.y"
+#line 140 "compilador.y"
 

@@ -1,3 +1,6 @@
+%option yylineno
+%option noyywrap
+
 %{
     #include <stdio.h>
     #include <stdlib.h>
@@ -8,9 +11,6 @@
     #define YY_USER_INIT yylineno = 1;
     
 %}
-
-%option yylineno
-%option noyywrap
 
 
 LETRA [a-zA-Z]
@@ -80,6 +80,15 @@ stdio.h {return(BIBLIOTECA);}
 "||" {return(OR);}
 
 
+LETRA{ yylval.cadeia= (char*)malloc((strlen(yytext)+1)*sizeof(char)); strcpy(yylval.cadeia, yytext); return(INT_LIT); }
+PALAVRA{ yylval.cadeia= (char*)malloc((strlen(yytext)+1)*sizeof(char)); strcpy(yylval.cadeia, yytext); return(INT_LIT); }
+DIGITO{ yylval.cadeia= (char*)malloc((strlen(yytext)+1)*sizeof(char)); strcpy(yylval.cadeia, yytext); return(INT_LIT); }
+NUMERO{ yylval.cadeia= (char*)malloc((strlen(yytext)+1)*sizeof(char)); strcpy(yylval.cadeia, yytext); return(INT_LIT); }
+VARIAVEL{ yylval.cadeia= (char*)malloc((strlen(yytext)+1)*sizeof(char)); strcpy(yylval.cadeia, yytext); return(INT_LIT); }
+ESPACO{ yylval.cadeia= (char*)malloc((strlen(yytext)+1)*sizeof(char)); strcpy(yylval.cadeia, yytext); return(INT_LIT); }
+
+/*
+
 {LETRA} {return(yytext);}
 {PALAVRA} {return(yytext);}
 {DIGITO} {return(yytext);}
@@ -87,7 +96,7 @@ stdio.h {return(BIBLIOTECA);}
 {VARIAVEL} {return(yytext);}
 {ASPA}{PALAVRA}+{ASPA} {return(yytext);}
 {ESPACO} {return(yytext);}
-
+*/
 
 %%
 

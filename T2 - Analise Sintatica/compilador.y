@@ -16,6 +16,9 @@
 	extern Node * syntax_tree;
 %}
 
+ 
+%token<cadeia>INT_LIT 
+
 %union {
 	char* cadeia;
 	struct _node * node;
@@ -73,8 +76,7 @@ code:
 	syntax_tree = $$;
 };
 
-acao:{ 
-	$$ = create_node(1, code_node, NULL, NULL); }
+acao: atribuicao{ $$ = create_node(@1.first_line, atribuicao_node, NULL, $1, NULL); }
 	| atribuicao code{$$ = create_node(@1.first_line, atribuicao_node, NULL, $1, $2, NULL); }
 
 /*
@@ -86,8 +88,8 @@ acao:{
 
 atribuicao: 
 	VARIAVEL '=' expressao {
-	Node* variavel = create_node(@1.first_line,variavel_node, "VARIAVEL", NULL);
-	Node* igual = create_node(@1.first_line,igual_node,'=',NULL);
+	Node* variavel = create_node(@1.first_line,variavel_node, yylval.cadeia, NULL);
+	Node* igual = create_node(@1.first_line,igual_node,"=",NULL);
 	$$ = create_node(@1.first_line, atribuicao_node, NULL, variavel, igual, $3, NULL);  };
 
 
@@ -100,38 +102,38 @@ tipo:
 
 expressao: 
 		expressao '+' expressao {			
-		Node* soma = create_node(@1.first_line, soma_node,'+',NULL);
+		Node* soma = create_node(@1.first_line, soma_node,"+",NULL);
 		$$ = create_node(@1.first_line, expressao_node, NULL, $1, soma, $3, NULL);}
 
 		|  expressao '-' expressao {
-		Node* subtracao = create_node(@1.first_line, subtracao_node,'-', NULL);
+		Node* subtracao = create_node(@1.first_line, subtracao_node,"-", NULL);
 		$$ = create_node(@1.first_line, expressao_node, NULL, $1, subtracao, $3, NULL);}
 
 		|  expressao '/' expressao {
-		Node* divisao = create_node(@1.first_line, divisao_node,'/', NULL);
+		Node* divisao = create_node(@1.first_line, divisao_node,"/", NULL);
 		$$ = create_node(@1.first_line, expressao_node, NULL, $1, divisao, $3, NULL);}
 
 		|  expressao '*' expressao {
-		Node* multiplicacao = create_node(@1.first_line, multiplicacao_node,'+', NULL);
+		Node* multiplicacao = create_node(@1.first_line, multiplicacao_node,"+", NULL);
 		$$ = create_node(@1.first_line, expressao_node, NULL, $1, multiplicacao, $3, NULL);}
 
 		|  expressao '+' tipo {
-		Node* soma = create_node(@1.first_line, soma_node,'+',NULL);
+		Node* soma = create_node(@1.first_line, soma_node,"+",NULL);
 		$$ = create_node(@1.first_line, expressao_node, NULL, $1, soma, $3, NULL);}
 
 		|  expressao '-' tipo {
-		Node* subtracao = create_node(@1.first_line, subtracao_node,'-', NULL);
+		Node* subtracao = create_node(@1.first_line, subtracao_node,"-", NULL);
 		$$ = create_node(@1.first_line, expressao_node, NULL, $1, subtracao, $3, NULL);}
 
 		|  expressao '/' tipo {
-		Node* divisao = create_node(@1.first_line, divisao_node,'/', NULL);
+		Node* divisao = create_node(@1.first_line, divisao_node,"/", NULL);
 		$$ = create_node(@1.first_line, expressao_node, NULL, $1, divisao, $3, NULL);}
 
 		|  expressao '*' tipo {
-		Node* multiplicacao = create_node(@1.first_line, multiplicacao_node,'+', NULL);
+		Node* multiplicacao = create_node(@1.first_line, multiplicacao_node,"+", NULL);
 		$$ = create_node(@1.first_line, expressao_node, NULL, $1, multiplicacao, $3, NULL);}
 
-		|  expressao{$$ = $1;}
+		|  VARIAVEL{$$ = create_node(@1.first_line, expressao_node, "VARIAVEL", NULL);}
 		
 
 
