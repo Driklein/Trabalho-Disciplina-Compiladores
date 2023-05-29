@@ -49,21 +49,21 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    INT = 258,
-    DOUBLE = 259,
-    FLOAT = 260,
-    CHAR = 261,
-    BOOL = 262,
-    IF = 263,
-    ELSE = 264,
-    WHILE = 265,
-    FOR = 266,
-    PRINTF = 267,
-    MAIN = 268,
-    RETURN = 269,
-    BIBLIOTECA = 270,
-    INCLUDE = 271,
-    VARIAVEL = 272
+    INT_TOKEN = 258,
+    DOUBLE_TOKEN = 259,
+    FLOAT_TOKEN = 260,
+    CHAR_TOKEN = 261,
+    BOOL_TOKEN = 262,
+    IF_TOKEN = 263,
+    ELSE_TOKEN = 264,
+    WHILE_TOKEN = 265,
+    FOR_TOKEN = 266,
+    PRINTF_TOKEN = 267,
+    MAIN_TOKEN = 268,
+    RETURN_TOKEN = 269,
+    BIBLIOTECA_TOKEN = 270,
+    INCLUDE_TOKEN = 271,
+    VARIAVEL_TOKEN = 272
   };
 #endif
 
@@ -71,7 +71,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 19 "compilador.y"
+#line 22 "compilador.y"
 
 	char* cadeia;
 	struct _node * node;

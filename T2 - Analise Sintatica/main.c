@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
    * Soh chama o analisador lexical default fornecido pelo output do Flex:
    */
   
+  
   while (token=yylex()) { 
      /* neste laco, obtem-se "palavra por palavra" os tokens reconhecidos
       * pelo scanner fornecido pelo Lex. Poderia ser feita a analise

@@ -17,31 +17,31 @@
 %}
 
  
-%token<cadeia>INT_LIT 
+
 
 %union {
 	char* cadeia;
 	struct _node * node;
 }
 
-%token INT
-%token DOUBLE
-%token FLOAT
-%token CHAR
-%token BOOL
+%token INT_TOKEN
+%token DOUBLE_TOKEN
+%token FLOAT_TOKEN
+%token CHAR_TOKEN
+%token BOOL_TOKEN
 
-%token IF
-%token ELSE
-%token WHILE
-%token FOR
-%token PRINTF
+%token IF_TOKEN
+%token ELSE_TOKEN
+%token WHILE_TOKEN
+%token FOR_TOKEN
+%token PRINTF_TOKEN
 
-%token MAIN
-%token RETURN
-%token BIBLIOTECA
-%token INCLUDE
+%token MAIN_TOKEN
+%token RETURN_TOKEN
+%token BIBLIOTECA_TOKEN
+%token INCLUDE_TOKEN
 
-%token VARIAVEL
+%token VARIAVEL_TOKEN
 
 
 %type<node> code
@@ -87,17 +87,17 @@ acao: atribuicao{ $$ = create_node(@1.first_line, atribuicao_node, NULL, $1, NUL
 
 
 atribuicao: 
-	VARIAVEL '=' expressao {
+	VARIAVEL_TOKEN '=' expressao {
 	Node* variavel = create_node(@1.first_line,variavel_node, yylval.cadeia, NULL);
 	Node* igual = create_node(@1.first_line,igual_node,"=",NULL);
 	$$ = create_node(@1.first_line, atribuicao_node, NULL, variavel, igual, $3, NULL);  };
 
 
 tipo: 
-	  INT {$$ = create_node(@1.first_line, int_node, NULL, NULL );}
-	| FLOAT {$$ = create_node(@1.first_line, float_node, NULL, NULL );}
-	| CHAR {$$ = create_node(@1.first_line, char_node, NULL, NULL );}
-	| BOOL {$$ = create_node(@1.first_line, int_node, NULL, NULL );};
+	  INT_TOKEN {$$ = create_node(@1.first_line, int_node, NULL, NULL );}
+	| FLOAT_TOKEN {$$ = create_node(@1.first_line, float_node, NULL, NULL );}
+	| CHAR_TOKEN{$$ = create_node(@1.first_line, char_node, NULL, NULL );}
+	| BOOL_TOKEN {$$ = create_node(@1.first_line, int_node, NULL, NULL );};
 
 
 expressao: 
@@ -133,7 +133,7 @@ expressao:
 		Node* multiplicacao = create_node(@1.first_line, multiplicacao_node,"+", NULL);
 		$$ = create_node(@1.first_line, expressao_node, NULL, $1, multiplicacao, $3, NULL);}
 
-		|  VARIAVEL{$$ = create_node(@1.first_line, expressao_node, "VARIAVEL", NULL);}
+		|  VARIAVEL_TOKEN{$$ = create_node(@1.first_line, expressao_node, "VARIAVEL", NULL);}
 		
 
 

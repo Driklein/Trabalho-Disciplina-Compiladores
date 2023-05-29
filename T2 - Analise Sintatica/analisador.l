@@ -1,66 +1,54 @@
-%option yylineno
-%option noyywrap
-
 %{
     #include <stdio.h>
     #include <stdlib.h>
-    #include "tokens.h"
-    #include "compilador.tab.h"
-
-    #define YY_USER_ACTION yylloc.first_line = yylineno;
-    #define YY_USER_INIT yylineno = 1;
-    
+    #include "tokens.h"    
 %}
-
 
 LETRA [a-zA-Z]
 VARIAVEL [a-zA-Z][a-zA-Z0-9]*
 DIGITO [0-9]
-NUMERO {DIGITO}+
-PALAVRA {LETRA}+
+NUMERO {DIGITO}*
+PALAVRA {LETRA}*
 ABRE_CHAVES [{]
 FECHA_CHAVES [}]
 ABRE_PARENTESES [(]
 FECHA_PARENTESES [)]
-ABRE_COLCHETE[[]
-FECHA_COLCHETE[]]
+ABRE_COLCHETES[[]
+FECHA_COLCHETES[]]
 ABRE_COMENTARIO [/*]
 FECHA_COMENTARIO [*/]
 ESPACO [ ]
 ASPA ["]
-
+STRING [ASPA][PALAVRA][ASPA]
 %%
 
-int {return(INT);}
+int {printf("TIPO INT ");return(INT);}
 double {return(DOUBLE);}
 float {return(FLOAT);}
 char {return(CHAR);}
 bool {return(BOOL);}
 
-
-if {return(IF);}
+if {printf("IFFF");return(IF);}
 else {return(ELSE);}
 while {return(WHILE);}
 for {return(FOR);}
 printf {return(PRINTF);}
-
 
 main {return(MAIN);}
 return {return(RETURN);}
 stdio.h {return(BIBLIOTECA);}
 #include {return(INCLUDE);}
 
-
-"{" {return(ABRE_CHAVE);}
-"}" {return(FECHA_CHAVE);}
-"(" {return(ABRE_PARENTESE);}
-")" {return(FECHA_PARENTESE);}
-"[" {return(ABRE_COLCHETE);}
-"]" {return(FECHA_COLCHETE);}
+"{" {return(ABRE_CHAVES);}
+"}" {return(FECHA_CHAVES);}
+"(" {return(ABRE_PARENTESES);}
+")" {return(FECHA_PARENTESES);}
+"[" {return(ABRE_COLCHETES);}
+"]" {return(FECHA_COLCHETES);}
 "." {return(PONTO);}
 "," {return(VIRGULA);}
-";" {return(PONTO_VIRGULA);}
-"\"" {return(ASPA);}
+";" {printf(" PONTO VIRGULA\n");return(PONTO_VIRGULA);}
+ASPA {return(ASPA);}
 
 
 "*" {return(MULTIPLICACAO);}
@@ -68,7 +56,7 @@ stdio.h {return(BIBLIOTECA);}
 "-" {return(SUBTRACAO);}
 "/" {return(DIVISAO);}
 "%" {return(PORCENTAGEM);}
-"=" {return(ATRIBUICAO);}
+"=" {printf("ATRIBUICAO ");return(ATRIBUICAO);}
 "==" {return(IGUAL);}
 "!=" {return(DIFERENTE);}
 "!" {return(NEGACAO);}
@@ -80,23 +68,13 @@ stdio.h {return(BIBLIOTECA);}
 "||" {return(OR);}
 
 
-LETRA{ yylval.cadeia= (char*)malloc((strlen(yytext)+1)*sizeof(char)); strcpy(yylval.cadeia, yytext); return(INT_LIT); }
-PALAVRA{ yylval.cadeia= (char*)malloc((strlen(yytext)+1)*sizeof(char)); strcpy(yylval.cadeia, yytext); return(INT_LIT); }
-DIGITO{ yylval.cadeia= (char*)malloc((strlen(yytext)+1)*sizeof(char)); strcpy(yylval.cadeia, yytext); return(INT_LIT); }
-NUMERO{ yylval.cadeia= (char*)malloc((strlen(yytext)+1)*sizeof(char)); strcpy(yylval.cadeia, yytext); return(INT_LIT); }
-VARIAVEL{ yylval.cadeia= (char*)malloc((strlen(yytext)+1)*sizeof(char)); strcpy(yylval.cadeia, yytext); return(INT_LIT); }
-ESPACO{ yylval.cadeia= (char*)malloc((strlen(yytext)+1)*sizeof(char)); strcpy(yylval.cadeia, yytext); return(INT_LIT); }
+{LETRA} {printf("LETRA ");return(LETRA);}
+{PALAVRA} {printf("PALAVRA");return(PALAVRA);}
+{DIGITO} {printf("DIGITO");return(DIGITO);}
+{NUMERO} {printf("NUMERO");return(NUMERO);}
+{VARIAVEL} {printf("VARIAVEL ");return(VARIAVEL);}
+{ESPACO} {return(ESPACO);}
 
-/*
-
-{LETRA} {return(yytext);}
-{PALAVRA} {return(yytext);}
-{DIGITO} {return(yytext);}
-{NUMERO} {return(yytext);}
-{VARIAVEL} {return(yytext);}
-{ASPA}{PALAVRA}+{ASPA} {return(yytext);}
-{ESPACO} {return(yytext);}
-*/
 
 %%
 

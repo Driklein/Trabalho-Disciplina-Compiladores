@@ -131,21 +131,21 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    INT = 258,
-    DOUBLE = 259,
-    FLOAT = 260,
-    CHAR = 261,
-    BOOL = 262,
-    IF = 263,
-    ELSE = 264,
-    WHILE = 265,
-    FOR = 266,
-    PRINTF = 267,
-    MAIN = 268,
-    RETURN = 269,
-    BIBLIOTECA = 270,
-    INCLUDE = 271,
-    VARIAVEL = 272
+    INT_TOKEN = 258,
+    DOUBLE_TOKEN = 259,
+    FLOAT_TOKEN = 260,
+    CHAR_TOKEN = 261,
+    BOOL_TOKEN = 262,
+    IF_TOKEN = 263,
+    ELSE_TOKEN = 264,
+    WHILE_TOKEN = 265,
+    FOR_TOKEN = 266,
+    PRINTF_TOKEN = 267,
+    MAIN_TOKEN = 268,
+    RETURN_TOKEN = 269,
+    BIBLIOTECA_TOKEN = 270,
+    INCLUDE_TOKEN = 271,
+    VARIAVEL_TOKEN = 272
   };
 #endif
 
@@ -153,7 +153,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 19 "compilador.y"
+#line 22 "compilador.y"
 
 	char* cadeia;
 	struct _node * node;
@@ -552,8 +552,8 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    70,    70,    76,    77,    87,    94,    95,    96,    97,
-     101,   105,   109,   113,   117,   121,   125,   129,   133
+       0,    73,    73,    79,    80,    90,    97,    98,    99,   100,
+     104,   108,   112,   116,   120,   124,   128,   132,   136
 };
 #endif
 
@@ -562,10 +562,12 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "INT", "DOUBLE", "FLOAT", "CHAR", "BOOL",
-  "IF", "ELSE", "WHILE", "FOR", "PRINTF", "MAIN", "RETURN", "BIBLIOTECA",
-  "INCLUDE", "VARIAVEL", "';'", "'='", "'+'", "'-'", "'/'", "'*'",
-  "$accept", "code", "acao", "atribuicao", "tipo", "expressao", YY_NULLPTR
+  "$end", "error", "$undefined", "INT_TOKEN", "DOUBLE_TOKEN",
+  "FLOAT_TOKEN", "CHAR_TOKEN", "BOOL_TOKEN", "IF_TOKEN", "ELSE_TOKEN",
+  "WHILE_TOKEN", "FOR_TOKEN", "PRINTF_TOKEN", "MAIN_TOKEN", "RETURN_TOKEN",
+  "BIBLIOTECA_TOKEN", "INCLUDE_TOKEN", "VARIAVEL_TOKEN", "';'", "'='",
+  "'+'", "'-'", "'/'", "'*'", "$accept", "code", "acao", "atribuicao",
+  "tipo", "expressao", YY_NULLPTR
 };
 #endif
 
@@ -1449,132 +1451,132 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 70 "compilador.y"
+#line 73 "compilador.y"
                 {
 	Node* pontoevirgula = create_node((yylsp[-1]).first_line,pontoevirgula_node,';',NULL);
 	(yyval.node) = create_node((yylsp[-1]).first_line, code_node, NULL, (yyvsp[-1].node), pontoevirgula, NULL); 
 	syntax_tree = (yyval.node);
 }
-#line 1459 "compilador.tab.c"
+#line 1461 "compilador.tab.c"
     break;
 
   case 3:
-#line 76 "compilador.y"
+#line 79 "compilador.y"
                 { (yyval.node) = create_node((yylsp[0]).first_line, atribuicao_node, NULL, (yyvsp[0].node), NULL); }
-#line 1465 "compilador.tab.c"
+#line 1467 "compilador.tab.c"
     break;
 
   case 4:
-#line 77 "compilador.y"
+#line 80 "compilador.y"
                          {(yyval.node) = create_node((yylsp[-1]).first_line, atribuicao_node, NULL, (yyvsp[-1].node), (yyvsp[0].node), NULL); }
-#line 1471 "compilador.tab.c"
+#line 1473 "compilador.tab.c"
     break;
 
   case 5:
-#line 87 "compilador.y"
-                               {
+#line 90 "compilador.y"
+                                     {
 	Node* variavel = create_node((yylsp[-2]).first_line,variavel_node, yylval.cadeia, NULL);
 	Node* igual = create_node((yylsp[-2]).first_line,igual_node,"=",NULL);
 	(yyval.node) = create_node((yylsp[-2]).first_line, atribuicao_node, NULL, variavel, igual, (yyvsp[0].node), NULL);  }
-#line 1480 "compilador.tab.c"
+#line 1482 "compilador.tab.c"
     break;
 
   case 6:
-#line 94 "compilador.y"
-              {(yyval.node) = create_node((yylsp[0]).first_line, int_node, NULL, NULL );}
-#line 1486 "compilador.tab.c"
+#line 97 "compilador.y"
+                    {(yyval.node) = create_node((yylsp[0]).first_line, int_node, NULL, NULL );}
+#line 1488 "compilador.tab.c"
     break;
 
   case 7:
-#line 95 "compilador.y"
-                {(yyval.node) = create_node((yylsp[0]).first_line, float_node, NULL, NULL );}
-#line 1492 "compilador.tab.c"
+#line 98 "compilador.y"
+                      {(yyval.node) = create_node((yylsp[0]).first_line, float_node, NULL, NULL );}
+#line 1494 "compilador.tab.c"
     break;
 
   case 8:
-#line 96 "compilador.y"
-               {(yyval.node) = create_node((yylsp[0]).first_line, char_node, NULL, NULL );}
-#line 1498 "compilador.tab.c"
+#line 99 "compilador.y"
+                    {(yyval.node) = create_node((yylsp[0]).first_line, char_node, NULL, NULL );}
+#line 1500 "compilador.tab.c"
     break;
 
   case 9:
-#line 97 "compilador.y"
-               {(yyval.node) = create_node((yylsp[0]).first_line, int_node, NULL, NULL );}
-#line 1504 "compilador.tab.c"
+#line 100 "compilador.y"
+                     {(yyval.node) = create_node((yylsp[0]).first_line, int_node, NULL, NULL );}
+#line 1506 "compilador.tab.c"
     break;
 
   case 10:
-#line 101 "compilador.y"
+#line 104 "compilador.y"
                                         {			
 		Node* soma = create_node((yylsp[-2]).first_line, soma_node,"+",NULL);
 		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), soma, (yyvsp[0].node), NULL);}
-#line 1512 "compilador.tab.c"
+#line 1514 "compilador.tab.c"
     break;
 
   case 11:
-#line 105 "compilador.y"
+#line 108 "compilador.y"
                                            {
 		Node* subtracao = create_node((yylsp[-2]).first_line, subtracao_node,"-", NULL);
 		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), subtracao, (yyvsp[0].node), NULL);}
-#line 1520 "compilador.tab.c"
+#line 1522 "compilador.tab.c"
     break;
 
   case 12:
-#line 109 "compilador.y"
+#line 112 "compilador.y"
                                            {
 		Node* divisao = create_node((yylsp[-2]).first_line, divisao_node,"/", NULL);
 		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), divisao, (yyvsp[0].node), NULL);}
-#line 1528 "compilador.tab.c"
+#line 1530 "compilador.tab.c"
     break;
 
   case 13:
-#line 113 "compilador.y"
+#line 116 "compilador.y"
                                            {
 		Node* multiplicacao = create_node((yylsp[-2]).first_line, multiplicacao_node,"+", NULL);
 		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), multiplicacao, (yyvsp[0].node), NULL);}
-#line 1536 "compilador.tab.c"
+#line 1538 "compilador.tab.c"
     break;
 
   case 14:
-#line 117 "compilador.y"
+#line 120 "compilador.y"
                                       {
 		Node* soma = create_node((yylsp[-2]).first_line, soma_node,"+",NULL);
 		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), soma, (yyvsp[0].node), NULL);}
-#line 1544 "compilador.tab.c"
+#line 1546 "compilador.tab.c"
     break;
 
   case 15:
-#line 121 "compilador.y"
+#line 124 "compilador.y"
                                       {
 		Node* subtracao = create_node((yylsp[-2]).first_line, subtracao_node,"-", NULL);
 		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), subtracao, (yyvsp[0].node), NULL);}
-#line 1552 "compilador.tab.c"
+#line 1554 "compilador.tab.c"
     break;
 
   case 16:
-#line 125 "compilador.y"
+#line 128 "compilador.y"
                                       {
 		Node* divisao = create_node((yylsp[-2]).first_line, divisao_node,"/", NULL);
 		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), divisao, (yyvsp[0].node), NULL);}
-#line 1560 "compilador.tab.c"
+#line 1562 "compilador.tab.c"
     break;
 
   case 17:
-#line 129 "compilador.y"
+#line 132 "compilador.y"
                                       {
 		Node* multiplicacao = create_node((yylsp[-2]).first_line, multiplicacao_node,"+", NULL);
 		(yyval.node) = create_node((yylsp[-2]).first_line, expressao_node, NULL, (yyvsp[-2].node), multiplicacao, (yyvsp[0].node), NULL);}
-#line 1568 "compilador.tab.c"
+#line 1570 "compilador.tab.c"
     break;
 
   case 18:
-#line 133 "compilador.y"
-                           {(yyval.node) = create_node((yylsp[0]).first_line, expressao_node, "VARIAVEL", NULL);}
-#line 1574 "compilador.tab.c"
+#line 136 "compilador.y"
+                                 {(yyval.node) = create_node((yylsp[0]).first_line, expressao_node, "VARIAVEL", NULL);}
+#line 1576 "compilador.tab.c"
     break;
 
 
-#line 1578 "compilador.tab.c"
+#line 1580 "compilador.tab.c"
 
       default: break;
     }
@@ -1812,5 +1814,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 140 "compilador.y"
+#line 143 "compilador.y"
 
