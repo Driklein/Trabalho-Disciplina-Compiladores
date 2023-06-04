@@ -5,7 +5,6 @@
 #define CHAR 263
 #define BOOL 264
 
-// Comandos
 #define IF  265
 #define ELSE  266
 #define WHILE  267

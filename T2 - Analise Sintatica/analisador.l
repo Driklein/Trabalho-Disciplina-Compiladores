@@ -2,21 +2,24 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include "tokens.h"    
+    #include "compilador.tab.h"
+    
 %}
+
 
 LETRA [a-zA-Z]
 VARIAVEL [a-zA-Z][a-zA-Z0-9]*
 DIGITO [0-9]
 NUMERO {DIGITO}*
 PALAVRA {LETRA}*
-ABRE_CHAVES [{]
-FECHA_CHAVES [}]
-ABRE_PARENTESES [(]
-FECHA_PARENTESES [)]
-ABRE_COLCHETES[[]
-FECHA_COLCHETES[]]
-ABRE_COMENTARIO [/*]
-FECHA_COMENTARIO [*/]
+ABRE_CHAVES ['{']
+FECHA_CHAVES ['}']
+ABRE_PARENTESES ['(']
+FECHA_PARENTESES [')']
+ABRE_COLCHETES['[']
+FECHA_COLCHETES[']']
+
+
 ESPACO [ ]
 ASPA ["]
 STRING [ASPA][PALAVRA][ASPA]
@@ -28,7 +31,7 @@ float {return(FLOAT);}
 char {return(CHAR);}
 bool {return(BOOL);}
 
-if {printf("IFFF");return(IF);}
+if {printf("IF");return(IF);}
 else {return(ELSE);}
 while {return(WHILE);}
 for {return(FOR);}
@@ -47,7 +50,7 @@ stdio.h {return(BIBLIOTECA);}
 "]" {return(FECHA_COLCHETES);}
 "." {return(PONTO);}
 "," {return(VIRGULA);}
-";" {printf(" PONTO VIRGULA\n");return(PONTO_VIRGULA);}
+";" {return(PONTO_VIRGULA);}
 ASPA {return(ASPA);}
 
 

@@ -1,7 +1,9 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 
 extern FILE *yyin;
+extern int yylex();
 int main(int argc, char* argv[]) {
    int token;
    if (argc != 2) {

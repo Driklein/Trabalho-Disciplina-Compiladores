@@ -49,21 +49,7 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    INT_TOKEN = 258,
-    DOUBLE_TOKEN = 259,
-    FLOAT_TOKEN = 260,
-    CHAR_TOKEN = 261,
-    BOOL_TOKEN = 262,
-    IF_TOKEN = 263,
-    ELSE_TOKEN = 264,
-    WHILE_TOKEN = 265,
-    FOR_TOKEN = 266,
-    PRINTF_TOKEN = 267,
-    MAIN_TOKEN = 268,
-    RETURN_TOKEN = 269,
-    BIBLIOTECA_TOKEN = 270,
-    INCLUDE_TOKEN = 271,
-    VARIAVEL_TOKEN = 272
+    INT_TOKEN = 260
   };
 #endif
 
@@ -71,12 +57,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 22 "compilador.y"
+#line 19 "compilador.y"
 
 	char* cadeia;
 	struct _node * node;
 
-#line 80 "compilador.tab.h"
+#line 66 "compilador.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -84,23 +70,9 @@ typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
-/* Location type.  */
-#if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
-typedef struct YYLTYPE YYLTYPE;
-struct YYLTYPE
-{
-  int first_line;
-  int first_column;
-  int last_line;
-  int last_column;
-};
-# define YYLTYPE_IS_DECLARED 1
-# define YYLTYPE_IS_TRIVIAL 1
-#endif
-
 
 extern YYSTYPE yylval;
-extern YYLTYPE yylloc;
+
 int yyparse (void);
 
 #endif /* !YY_YY_COMPILADOR_TAB_H_INCLUDED  */

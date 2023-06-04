@@ -29,6 +29,7 @@ typedef int Node_type;
 #define int_node              501
 #define real_node 504
 #define char_node 505
+#define float_node 506
 #define acao_node 507
 #define acoes_node 508
 #define atribuicao_node 509
