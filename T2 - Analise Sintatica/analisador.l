@@ -5,7 +5,7 @@
     #include "compilador.tab.h"
     
 %}
-
+%option noyywrap 
 
 LETRA [a-zA-Z]
 VARIAVEL [a-zA-Z][a-zA-Z0-9]*
@@ -78,6 +78,8 @@ ASPA {return(ASPA);}
 {VARIAVEL} {printf("VARIAVEL ");return(VARIAVEL);}
 {ESPACO} {return(ESPACO);}
 
+
+[[:^space]]+;
 
 %%
 

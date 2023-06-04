@@ -57,7 +57,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 19 "compilador.y"
+#line 18 "compilador.y"
 
 	char* cadeia;
 	struct _node * node;

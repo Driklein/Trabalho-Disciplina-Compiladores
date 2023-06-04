@@ -77,13 +77,12 @@
 	#include <stdlib.h>
 	#include "node.h"
 	#include "compilador.tab.h"
-
 	extern int yyerror(const char* msg ); 
 	extern int yylex();
 
 	extern Node * syntax_tree;
 
-#line 87 "compilador.tab.c"
+#line 86 "compilador.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -139,12 +138,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 19 "compilador.y"
+#line 18 "compilador.y"
 
 	char* cadeia;
 	struct _node * node;
 
-#line 148 "compilador.tab.c"
+#line 147 "compilador.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -520,7 +519,7 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    65,    65,    71
+       0,    64,    64,    70
 };
 #endif
 
@@ -1305,23 +1304,23 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 65 "compilador.y"
+#line 64 "compilador.y"
                   { printf("RECONHECI TUA LINGUAGEM");
 	///Node* pontoevirgula = create_node(@1.first_line,pontoevirgula_node,';',NULL);
 	//$$ = create_node(@1.first_line, code_node, NULL, $1, pontoevirgula, NULL); 
 	//syntax_tree = $$;
 }
-#line 1315 "compilador.tab.c"
+#line 1314 "compilador.tab.c"
     break;
 
   case 3:
-#line 71 "compilador.y"
+#line 70 "compilador.y"
                {}
-#line 1321 "compilador.tab.c"
+#line 1320 "compilador.tab.c"
     break;
 
 
-#line 1325 "compilador.tab.c"
+#line 1324 "compilador.tab.c"
 
       default: break;
     }
@@ -1553,5 +1552,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 136 "compilador.y"
+#line 135 "compilador.y"
 
