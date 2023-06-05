@@ -1,1 +1,4 @@
-"int a = 10;"
+int dedo;
+
+
+int mano;

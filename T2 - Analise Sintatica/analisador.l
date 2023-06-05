@@ -8,30 +8,35 @@
 %option noyywrap 
 
 LETRA [a-zA-Z]
-VARIAVEL [a-zA-Z][a-zA-Z0-9]*
+VARIAVEL {LETRA}+
 DIGITO [0-9]
+CHAR {ASPA}{LETRA}{ASPA}
+STRING {ASPA}{LETRA}+{ASPA}
 NUMERO {DIGITO}*
-PALAVRA {LETRA}*
-ABRE_CHAVES ['{']
-FECHA_CHAVES ['}']
-ABRE_PARENTESES ['(']
-FECHA_PARENTESES [')']
-ABRE_COLCHETES['[']
-FECHA_COLCHETES[']']
+FLOAT {NUMERO}[.]{NUMERO}
 
 
-ESPACO [ ]
+ABRE_CHAVES [{]
+FECHA_CHAVES [}]
+ABRE_PARENTESES [(]
+FECHA_PARENTESES [)]
+ABRE_COLCHETES [[]
+FECHA_COLCHETES []]
+
+ESPACO_UNICO [ ]
+ESPACO_MULTIPLO [ ]{2,}
+QUEBRA_LINHA [\n]
+
 ASPA ["]
-STRING [ASPA][PALAVRA][ASPA]
+
 %%
 
-int {printf("TIPO INT ");return(INT);}
-double {return(DOUBLE);}
-float {return(FLOAT);}
-char {return(CHAR);}
-bool {return(BOOL);}
+int {return(INT_TIPO);}
+float {return(FLOAT_TIPO);}
+char {return(CHAR_TIPO);}
+bool {return(BOOL_TIPO);}
 
-if {printf("IF");return(IF);}
+if {return(IF);}
 else {return(ELSE);}
 while {return(WHILE);}
 for {return(FOR);}
@@ -59,7 +64,7 @@ ASPA {return(ASPA);}
 "-" {return(SUBTRACAO);}
 "/" {return(DIVISAO);}
 "%" {return(PORCENTAGEM);}
-"=" {printf("ATRIBUICAO ");return(ATRIBUICAO);}
+"=" {return(ATRIBUICAO);}
 "==" {return(IGUAL);}
 "!=" {return(DIFERENTE);}
 "!" {return(NEGACAO);}
@@ -71,12 +76,13 @@ ASPA {return(ASPA);}
 "||" {return(OR);}
 
 
-{LETRA} {printf("LETRA ");return(LETRA);}
-{PALAVRA} {printf("PALAVRA");return(PALAVRA);}
-{DIGITO} {printf("DIGITO");return(DIGITO);}
-{NUMERO} {printf("NUMERO");return(NUMERO);}
-{VARIAVEL} {printf("VARIAVEL ");return(VARIAVEL);}
-{ESPACO} {return(ESPACO);}
+{FLOAT}   {return (FLOAT);}
+{DIGITO} {return(DIGITO);}
+{NUMERO} {return(INT);}
+{VARIAVEL} {return(VARIAVEL);}
+{ESPACO_UNICO} {return(ESPACO_UNICO);}
+{ESPACO_MULTIPLO} {return(ESPACO_MULTIPLO);}
+{QUEBRA_LINHA} {return(QUEBRA_LINHA);}
 
 
 [[:^space]]+;

@@ -1,6 +1,5 @@
 
 #define INT 260
-#define DOUBLE 261
 #define FLOAT 262
 #define CHAR 263
 #define BOOL 264
@@ -43,8 +42,13 @@
 #define AND 298
 #define OR 299
 #define LETRA 300
-#define PALAVRA 301
 #define DIGITO 302
 #define NUMERO 303
-#define ESPACO 304
 #define STRING 305
+#define ESPACO_UNICO 306
+#define ESPACO_MULTIPLO 307
+#define QUEBRA_LINHA 308
+#define INT_TIPO 309
+#define FLOAT_TIPO 310
+#define CHAR_TIPO 311
+#define BOOL_TIPO 312

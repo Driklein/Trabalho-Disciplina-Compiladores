@@ -43,7 +43,6 @@ typedef int Node_type;
 #define pontoevirgula_node 518
 #define expressao_node 519
 
-
 #define igual_node 520
 
 

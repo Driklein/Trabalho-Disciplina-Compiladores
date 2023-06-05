@@ -20,9 +20,8 @@
 	struct _node * node;
 }
 
-%token INT_TOKEN 260
 /*
-%token DOUBLE_TOKEN 261
+%token INT_TOKEN 260
 %token FLOAT_TOKEN 262
 %token CHAR_TOKEN 263
 %token BOOL_TOKEN 264
@@ -36,16 +35,35 @@
 %token RETURN_TOKEN 271
 %token BIBLIOTECA_TOKEN 272
 %token INCLUDE_TOKEN 273
-%token VARIAVEL_TOKEN 274
 */
+%token VARIAVEL_TOKEN 274
+
+%token ESPACO_UNICO_TOKEN 306
+%token ESPACO_MULTIPLO_TOKEN 307
+%token QUEBRA_LINHA_TOKEN 308
+%token PONTO_VIRGULA_TOKEN 283
+
+%token INT_TIPO_TOKEN 309
+%token FLOAT_TIPO_TOKEN 310
+%token CHAR_TIPO_TOKEN 311
+%token BOOL_TIPO_TOKEN 312
+
+%token ATRIBUICAO_TOKEN 290
+
 
 %type<node> code 
 %type<node> acao
-/*
-%type<node> atribuicao
-%type<node> expressao
+//%type<node> valor
 %type<node> tipo
+%type<node> declaracao
+//%type<node> atribuicao
+%type<node> quebra_linha
+%type<node> espaco_obrigatorio
+%type<node> espaco_opcional
+%type<node> variavel
 
+/*
+%type<node> expressao
 %type<node> condicao
 %type<node> laco
 %type<node> impressao
@@ -61,75 +79,44 @@
 
 /* @1.first_line, "tipo do node", "lexema", "filhos", "NULL" (Não tem mais filhos)*/
 
-code: acao ' ' ';'{ printf("RECONHECI TUA LINGUAGEM");
-	///Node* pontoevirgula = create_node(@1.first_line,pontoevirgula_node,';',NULL);
-	//$$ = create_node(@1.first_line, code_node, NULL, $1, pontoevirgula, NULL); 
-	//syntax_tree = $$;
-};
+code: acao{printf("RECONHECI SUA LINGUAGEM");};
 
-acao: INT_TOKEN{};
+acao: declaracao acao{printf("DECLARACAO  ACAO\n");}
+	| declaracao{printf("DECLARACAO FINAL\n");}
+	| linha_vazia acao {}
+	| linha_vazia {}
+	;
 
-//acao: atribuicao{ $$ = create_node(@1.first_line, atribuicao_node, NULL, $1, NULL); }
-	//| atribuicao code{$$ = create_node(@1.first_line, atribuicao_node, NULL, $1, $2, NULL); };
+//valor: INT_TOKEN{printf("RECONHECI VALOR INTEIRO\n");}
+//	| FLOAT_TOKEN{};
 
-/*
-	| condicao code{$$ = create_node(@1.first_line, condicao_node, NULL, $1, $2, NULL); }
-	| laco code{$$ = create_node(@1.first_line, laco_node, NULL, $1, $2, NULL); }
-	| impressao code{$$ = create_node(@1.first_line, impressao_node, NULL, $1, $2, NULL); };
+declaracao: tipo espaco_obrigatorio variavel espaco_opcional ponto_virgula quebra_linha {printf("DECLARACAO\n\n"); }
+	| tipo espaco_obrigatorio variavel espaco_opcional ponto_virgula {printf("DECLARACAO\n\n"); }
+	;
 
+ponto_virgula:PONTO_VIRGULA_TOKEN{printf("RECONHECI PONTO E VIRGULA\n");};
 
+quebra_linha: espaco_opcional QUEBRA_LINHA_TOKEN{printf("QUEBROU LINHA\n");};
 
-atribuicao: 
-	VARIAVEL_TOKEN '=' expressao {
-	Node* variavel = create_node(@1.first_line,variavel_node, yylval.cadeia, NULL);
-	Node* igual = create_node(@1.first_line,igual_node,"=",NULL);
-	$$ = create_node(@1.first_line, atribuicao_node, NULL, variavel, igual, $3, NULL);  };
+tipo: INT_TIPO_TOKEN {printf("RECONHECI INT\n");}
+	| FLOAT_TIPO_TOKEN {}
+	| CHAR_TIPO_TOKEN{}
+	| BOOL_TIPO_TOKEN {};
 
+variavel: VARIAVEL_TOKEN{printf("RECONHECI VARIAVEL\n");};
 
-tipo: 
-	  INT_TOKEN {$$ = create_node(@1.first_line, int_node, NULL, NULL );}
-	| DOUBLE_TOKEN {$$ = create_node(@1.first_line, double_node, NULL, NULL );}
-	| FLOAT_TOKEN {$$ = create_node(@1.first_line, float_node, NULL, NULL );}
-	| CHAR_TOKEN{$$ = create_node(@1.first_line, char_node, NULL, NULL );}
-	| BOOL_TOKEN {$$ = create_node(@1.first_line, int_node, NULL, NULL );};
+//atribuicao:ATRIBUICAO_TOKEN{printf("RECONHECI ATRIBUICAO\n");};
 
+espaco_obrigatorio: ESPACO_MULTIPLO_TOKEN {}
+				| ESPACO_UNICO_TOKEN {}
+				;
 
-expressao: 
-		expressao '+' expressao {			
-		Node* soma = create_node(@1.first_line, soma_node,"+",NULL);
-		$$ = create_node(@1.first_line, expressao_node, NULL, $1, soma, $3, NULL);}
+espaco_opcional: ESPACO_MULTIPLO_TOKEN {}
+				| ESPACO_UNICO_TOKEN {}
+				| sem_espaco {}
+				;
 
-		|  expressao '-' expressao {
-		Node* subtracao = create_node(@1.first_line, subtracao_node,"-", NULL);
-		$$ = create_node(@1.first_line, expressao_node, NULL, $1, subtracao, $3, NULL);}
+sem_espaco: {};
 
-		|  expressao '/' expressao {
-		Node* divisao = create_node(@1.first_line, divisao_node,"/", NULL);
-		$$ = create_node(@1.first_line, expressao_node, NULL, $1, divisao, $3, NULL);}
-
-		|  expressao '*' expressao {
-		Node* multiplicacao = create_node(@1.first_line, multiplicacao_node,"+", NULL);
-		$$ = create_node(@1.first_line, expressao_node, NULL, $1, multiplicacao, $3, NULL);}
-
-		|  expressao '+' tipo {
-		Node* soma = create_node(@1.first_line, soma_node,"+",NULL);
-		$$ = create_node(@1.first_line, expressao_node, NULL, $1, soma, $3, NULL);}
-
-		|  expressao '-' tipo {
-		Node* subtracao = create_node(@1.first_line, subtracao_node,"-", NULL);
-		$$ = create_node(@1.first_line, expressao_node, NULL, $1, subtracao, $3, NULL);}
-
-		|  expressao '/' tipo {
-		Node* divisao = create_node(@1.first_line, divisao_node,"/", NULL);
-		$$ = create_node(@1.first_line, expressao_node, NULL, $1, divisao, $3, NULL);}
-
-		|  expressao '*' tipo {
-		Node* multiplicacao = create_node(@1.first_line, multiplicacao_node,"+", NULL);
-		$$ = create_node(@1.first_line, expressao_node, NULL, $1, multiplicacao, $3, NULL);}
-
-
-
-*/
-
-
+linha_vazia: espaco_opcional quebra_linha {}
 %%

@@ -16,12 +16,12 @@ int main(int argc, char* argv[]) {
    int token;
    
    if (argc < 2 || argc > 3) {
-     printf("uso: %s <input_file>. Try again!\n", argv[0]);
+     printf("Erro: %s <input_file>. Tente novamente!\n", argv[0]);
      exit(50);
    }
    yyin = fopen(argv[1], "r");
    if (!yyin) {
-     printf("Uso: %s <input_file>. Could not find %s. Try again!\n", 
+     printf("Erro: %s <input_file>. Não foi possivel encontrar %s!\n", 
          argv[0], argv[1]);
      exit(55);
    }
@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 	int result = yyparse();
   
 	
-	if(argc == 3) //testing
+	if(argc == 3) 
 		uncompile(stdout, syntax_tree);
 	else
 	{
@@ -38,10 +38,8 @@ int main(int argc, char* argv[]) {
 			printf("OKAY.\n");
 		else
       printf("\nFAIL. \n");
-			//yyerror("ERROR.\n");
 	}
 
-  
 }
 
 void yyerror(char* s) {
