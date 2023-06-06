@@ -1,9 +1,3 @@
-
-#define INT 260
-#define FLOAT 262
-#define CHAR 263
-#define BOOL 264
-
 #define IF  265
 #define ELSE  266
 #define WHILE  267
@@ -31,8 +25,8 @@
 #define SUBTRACAO 287
 #define DIVISAO 288
 #define PORCENTAGEM 289
-#define ATRIBUICAO 290
-#define IGUAL 291
+#define IGUAL 290
+#define IGUAL_IGUAL 291
 #define DIFERENTE 292
 #define NEGACAO 293
 #define MAIOR 294
@@ -44,11 +38,14 @@
 #define LETRA 300
 #define DIGITO 302
 #define NUMERO 303
-#define STRING 305
-#define ESPACO_UNICO 306
-#define ESPACO_MULTIPLO 307
-#define QUEBRA_LINHA 308
+#define ESPACO 306
 #define INT_TIPO 309
 #define FLOAT_TIPO 310
 #define CHAR_TIPO 311
 #define BOOL_TIPO 312
+#define ATRIBUICAO 313
+#define INT_VALOR 314
+#define FLOAT_VALOR 315
+#define CHAR_VALOR 316
+#define BOOL_VALOR 317
+#define STRING_VALOR 318

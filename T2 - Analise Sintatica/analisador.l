@@ -10,10 +10,13 @@
 LETRA [a-zA-Z]
 VARIAVEL {LETRA}+
 DIGITO [0-9]
-CHAR {ASPA}{LETRA}{ASPA}
-STRING {ASPA}{LETRA}+{ASPA}
-NUMERO {DIGITO}*
-FLOAT {NUMERO}[.]{NUMERO}
+NUMERO {DIGITO}+
+
+FLOAT_VALOR {NUMERO}[.]{NUMERO}
+INT_VALOR {NUMERO}
+BOOL_VALOR [0][1]
+CHAR_VALOR {ASPA}{LETRA}{ASPA}
+STRING_VALOR {ASPA}{LETRA}+{ASPA}
 
 
 ABRE_CHAVES [{]
@@ -23,10 +26,7 @@ FECHA_PARENTESES [)]
 ABRE_COLCHETES [[]
 FECHA_COLCHETES []]
 
-ESPACO_UNICO [ ]
-ESPACO_MULTIPLO [ ]{2,}
-QUEBRA_LINHA [\n]
-
+ESPACO [ ]+
 ASPA ["]
 
 %%
@@ -64,8 +64,8 @@ ASPA {return(ASPA);}
 "-" {return(SUBTRACAO);}
 "/" {return(DIVISAO);}
 "%" {return(PORCENTAGEM);}
-"=" {return(ATRIBUICAO);}
-"==" {return(IGUAL);}
+"=" {return(IGUAL);}
+"==" {return(IGUAL_IGUAL);}
 "!=" {return(DIFERENTE);}
 "!" {return(NEGACAO);}
 ">" {return(MAIOR);}
@@ -76,13 +76,16 @@ ASPA {return(ASPA);}
 "||" {return(OR);}
 
 
-{FLOAT}   {return (FLOAT);}
 {DIGITO} {return(DIGITO);}
-{NUMERO} {return(INT);}
+{NUMERO} {return(NUMERO);}
 {VARIAVEL} {return(VARIAVEL);}
-{ESPACO_UNICO} {return(ESPACO_UNICO);}
-{ESPACO_MULTIPLO} {return(ESPACO_MULTIPLO);}
-{QUEBRA_LINHA} {return(QUEBRA_LINHA);}
+{ESPACO} {return(ESPACO);}
+
+{INT_VALOR} {return(INT_VALOR);}
+{FLOAT_VALOR} {return(FLOAT_VALOR);}
+{CHAR_VALOR} {return(CHAR_VALOR);}
+{STRING_VALOR} {return(STRING_VALOR);}
+{BOOL_VALOR} {return(BOOL_VALOR);}
 
 
 [[:^space]]+;

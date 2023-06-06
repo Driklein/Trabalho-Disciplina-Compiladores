@@ -1,0 +1,5 @@
+int um ;
+float dois = 2.1;
+char teste = "k";
+string arvore = "helloworld";
+int tres = 3;

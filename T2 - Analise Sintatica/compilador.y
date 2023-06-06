@@ -20,9 +20,10 @@
 	struct _node * node;
 }
 
-/*
+
 %token INT_TOKEN 260
 %token FLOAT_TOKEN 262
+/*
 %token CHAR_TOKEN 263
 %token BOOL_TOKEN 264
 %token IF_TOKEN 265
@@ -38,9 +39,7 @@
 */
 %token VARIAVEL_TOKEN 274
 
-%token ESPACO_UNICO_TOKEN 306
-%token ESPACO_MULTIPLO_TOKEN 307
-%token QUEBRA_LINHA_TOKEN 308
+%token ESPACO_TOKEN 306
 %token PONTO_VIRGULA_TOKEN 283
 
 %token INT_TIPO_TOKEN 309
@@ -48,16 +47,21 @@
 %token CHAR_TIPO_TOKEN 311
 %token BOOL_TIPO_TOKEN 312
 
-%token ATRIBUICAO_TOKEN 290
+%token INT_VALOR_TOKEN  314
+%token FLOAT_VALOR_TOKEN  315
+%token CHAR_VALOR_TOKEN  316
+%token BOOL_VALOR_TOKEN  317
+%token STRING_VALOR_TOKEN 318
+
+%token IGUAL_TOKEN 290
 
 
 %type<node> code 
 %type<node> acao
-//%type<node> valor
+%type<node> valor
 %type<node> tipo
 %type<node> declaracao
-//%type<node> atribuicao
-%type<node> quebra_linha
+%type<node> atribuicao
 %type<node> espaco_obrigatorio
 %type<node> espaco_opcional
 %type<node> variavel
@@ -79,44 +83,41 @@
 
 /* @1.first_line, "tipo do node", "lexema", "filhos", "NULL" (Não tem mais filhos)*/
 
-code: acao{printf("RECONHECI SUA LINGUAGEM");};
+code: acao{printf("RECONHECENDO SUA LINGUAGEM\n");};
 
-acao: declaracao acao{printf("DECLARACAO  ACAO\n");}
-	| declaracao{printf("DECLARACAO FINAL\n");}
-	| linha_vazia acao {}
-	| linha_vazia {}
-	;
+acao: 
+	declaracao{printf("DECLARACAO FINAL\n");}
+	| declaracao acao{printf("DECLARACAO  ACAO\n");}
+	| espaco_opcional{};
 
-//valor: INT_TOKEN{printf("RECONHECI VALOR INTEIRO\n");}
-//	| FLOAT_TOKEN{};
+valor: INT_VALOR_TOKEN{printf("RECONHECENDO VALOR INTEIRO\n");}
+	| FLOAT_VALOR_TOKEN{printf("RECONHECENDO VALOR FLOAT\n");};
+	| CHAR_VALOR_TOKEN{printf("RECONHECENDO VALOR CHAR\n");};
+	| STRING_VALOR_TOKEN{printf("RECONHECENDO VALOR STRING\n");};
+	| BOOL_VALOR_TOKEN{printf("RECONHECENDO VALOR BOOL\n");};
 
-declaracao: tipo espaco_obrigatorio variavel espaco_opcional ponto_virgula quebra_linha {printf("DECLARACAO\n\n"); }
-	| tipo espaco_obrigatorio variavel espaco_opcional ponto_virgula {printf("DECLARACAO\n\n"); }
-	;
 
-ponto_virgula:PONTO_VIRGULA_TOKEN{printf("RECONHECI PONTO E VIRGULA\n");};
+declaracao: 
+	tipo espaco_obrigatorio variavel espaco_opcional ponto_virgula {printf("RECONHECENDO DECLARACAO\n"); };
+	| tipo espaco_obrigatorio variavel espaco_opcional atribuicao espaco_opcional valor espaco_opcional ponto_virgula espaco_opcional {printf("RECONHECENDO DECLARACAO INICIALIZANDO\n");}
 
-quebra_linha: espaco_opcional QUEBRA_LINHA_TOKEN{printf("QUEBROU LINHA\n");};
+ponto_virgula:PONTO_VIRGULA_TOKEN{printf("RECONHECENDO PONTO E VIRGULA\n");};
 
-tipo: INT_TIPO_TOKEN {printf("RECONHECI INT\n");}
-	| FLOAT_TIPO_TOKEN {}
+
+tipo: INT_TIPO_TOKEN {printf("RECONHECENDO TIPO INT\n");}
+	| FLOAT_TIPO_TOKEN {printf("RECONHECENDO TIPO FLOAT\n");}
 	| CHAR_TIPO_TOKEN{}
 	| BOOL_TIPO_TOKEN {};
 
-variavel: VARIAVEL_TOKEN{printf("RECONHECI VARIAVEL\n");};
+variavel: VARIAVEL_TOKEN{printf("RECONHECENDO VARIAVEL\n");};
 
-//atribuicao:ATRIBUICAO_TOKEN{printf("RECONHECI ATRIBUICAO\n");};
+atribuicao:IGUAL_TOKEN{printf("RECONHECENDO ATRIBUICAO\n");};
 
-espaco_obrigatorio: ESPACO_MULTIPLO_TOKEN {}
-				| ESPACO_UNICO_TOKEN {}
-				;
+espaco_obrigatorio: ESPACO_TOKEN {printf("RECONHECENDO ESPACO OBRIGATORIO\n");};
 
-espaco_opcional: ESPACO_MULTIPLO_TOKEN {}
-				| ESPACO_UNICO_TOKEN {}
-				| sem_espaco {}
-				;
+espaco_opcional: ESPACO_TOKEN {printf("RECONHECENDO ESPACO OPCIONAL\n");}
+				| {};
 
-sem_espaco: {};
 
-linha_vazia: espaco_opcional quebra_linha {}
+
 %%
