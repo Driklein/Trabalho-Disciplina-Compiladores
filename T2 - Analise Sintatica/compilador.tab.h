@@ -49,8 +49,6 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    INT_TOKEN = 260,
-    FLOAT_TOKEN = 262,
     VARIAVEL_TOKEN = 274,
     ESPACO_TOKEN = 306,
     PONTO_VIRGULA_TOKEN = 283,
@@ -63,6 +61,10 @@ extern int yydebug;
     CHAR_VALOR_TOKEN = 316,
     BOOL_VALOR_TOKEN = 317,
     STRING_VALOR_TOKEN = 318,
+    MULTIPLICACAO_TOKEN = 285,
+    SOMA_TOKEN = 286,
+    SUBTRACAO_TOKEN = 287,
+    DIVISAO_TOKEN = 288,
     IGUAL_TOKEN = 290
   };
 #endif
@@ -76,7 +78,7 @@ union YYSTYPE
 	char* cadeia;
 	struct _node * node;
 
-#line 80 "compilador.tab.h"
+#line 82 "compilador.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

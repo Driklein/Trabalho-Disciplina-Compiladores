@@ -20,12 +20,8 @@
 	struct _node * node;
 }
 
-
-%token INT_TOKEN 260
-%token FLOAT_TOKEN 262
 /*
-%token CHAR_TOKEN 263
-%token BOOL_TOKEN 264
+
 %token IF_TOKEN 265
 %token ELSE_TOKEN 266
 %token WHILE_TOKEN 267
@@ -53,6 +49,11 @@
 %token BOOL_VALOR_TOKEN  317
 %token STRING_VALOR_TOKEN 318
 
+%token MULTIPLICACAO_TOKEN 285
+%token SOMA_TOKEN 286
+%token SUBTRACAO_TOKEN 287
+%token DIVISAO_TOKEN 288
+
 %token IGUAL_TOKEN 290
 
 
@@ -65,9 +66,14 @@
 %type<node> espaco_obrigatorio
 %type<node> espaco_opcional
 %type<node> variavel
+%type<node> menos
+%type<node> mais
+%type<node> vezes
+%type<node> dividido
+%type<node> numero
+%type<node> expressao
 
 /*
-%type<node> expressao
 %type<node> condicao
 %type<node> laco
 %type<node> impressao
@@ -83,40 +89,73 @@
 
 /* @1.first_line, "tipo do node", "lexema", "filhos", "NULL" (Não tem mais filhos)*/
 
-code: acao{printf("RECONHECENDO SUA LINGUAGEM\n");};
+code: acao{};
 
 acao: 
 	declaracao{printf("DECLARACAO FINAL\n");}
 	| declaracao acao{printf("DECLARACAO  ACAO\n");}
+	| atribuicao{printf("ATRIBUICAO FINAL\n");}
+	| atribuicao acao{printf("ATRIBUICAO ACAO\n");}
 	| espaco_opcional{};
 
-valor: INT_VALOR_TOKEN{printf("RECONHECENDO VALOR INTEIRO\n");}
+valor: 
+	INT_VALOR_TOKEN{printf("RECONHECENDO VALOR INTEIRO\n");}
 	| FLOAT_VALOR_TOKEN{printf("RECONHECENDO VALOR FLOAT\n");};
 	| CHAR_VALOR_TOKEN{printf("RECONHECENDO VALOR CHAR\n");};
 	| STRING_VALOR_TOKEN{printf("RECONHECENDO VALOR STRING\n");};
 	| BOOL_VALOR_TOKEN{printf("RECONHECENDO VALOR BOOL\n");};
 
+numero:
+	INT_VALOR_TOKEN{printf("RECONHECENDO NUMERO INTEIRO\n");}
+	| FLOAT_VALOR_TOKEN{printf("RECONHECENDO NUMERO FLOAT\n");};
 
 declaracao: 
 	tipo espaco_obrigatorio variavel espaco_opcional ponto_virgula {printf("RECONHECENDO DECLARACAO\n"); };
-	| tipo espaco_obrigatorio variavel espaco_opcional atribuicao espaco_opcional valor espaco_opcional ponto_virgula espaco_opcional {printf("RECONHECENDO DECLARACAO INICIALIZANDO\n");}
 
-ponto_virgula:PONTO_VIRGULA_TOKEN{printf("RECONHECENDO PONTO E VIRGULA\n");};
+atribuicao:
+	variavel espaco_opcional igual espaco_opcional valor espaco_opcional ponto_virgula{printf("RECONHECENDO ATRIBUICAO VALOR\n");}
+	|variavel espaco_opcional igual espaco_opcional expressao espaco_opcional ponto_virgula{printf("RECONHECENDO ATRIBUICAO EXPRESSAO\n");};
+	
+expressao:
+	expressao mais expressao{printf("RECONHECENDO EXPRESSAO SOMA");}
+	| expressao espaco_opcional menos espaco_opcional expressao espaco_opcional{printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
+	| expressao espaco_opcional vezes espaco_opcional expressao espaco_opcional{printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
+	| expressao espaco_opcional dividido espaco_opcional expressao espaco_opcional{printf("RECONHECENDO EXPRESSAO DIVISAO");}
+	| numero espaco_opcional mais espaco_opcional numero espaco_opcional{printf("RECONHECENDO EXPRESSAO SOMA");}
+	| numero espaco_opcional menos espaco_opcional numero espaco_opcional{printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
+	| numero espaco_opcional vezes espaco_opcional numero espaco_opcional{printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
+	| numero espaco_opcional dividido espaco_opcional numero espaco_opcional{printf("RECONHECENDO EXPRESSAO DIVISAO");};
 
+mais:
+	SOMA_TOKEN{printf("RECONHECENDO SOMA\n");};
+menos:
+	SUBTRACAO_TOKEN{printf("RECONHECENDO SOMA\n");};
+vezes:
+	MULTIPLICACAO_TOKEN{printf("RECONHECENDO SOMA\n");};
+dividido:
+	DIVISAO_TOKEN{printf("RECONHECENDO SOMA\n");};
+	
 
-tipo: INT_TIPO_TOKEN {printf("RECONHECENDO TIPO INT\n");}
+ponto_virgula:
+	PONTO_VIRGULA_TOKEN{printf("RECONHECENDO PONTO E VIRGULA\n");};
+
+tipo: 
+	INT_TIPO_TOKEN {printf("RECONHECENDO TIPO INT\n");}
 	| FLOAT_TIPO_TOKEN {printf("RECONHECENDO TIPO FLOAT\n");}
-	| CHAR_TIPO_TOKEN{}
-	| BOOL_TIPO_TOKEN {};
+	| CHAR_TIPO_TOKEN{printf("RECONHECENDO TIPO CHAR\n");}
+	| BOOL_TIPO_TOKEN {printf("RECONHECENDO TIPO BOOL\n");};
 
-variavel: VARIAVEL_TOKEN{printf("RECONHECENDO VARIAVEL\n");};
+variavel: 
+	VARIAVEL_TOKEN{printf("RECONHECENDO VARIAVEL\n");};
 
-atribuicao:IGUAL_TOKEN{printf("RECONHECENDO ATRIBUICAO\n");};
+igual:
+	IGUAL_TOKEN{printf("RECONHECENDO IGUAL\n");};
 
-espaco_obrigatorio: ESPACO_TOKEN {printf("RECONHECENDO ESPACO OBRIGATORIO\n");};
+espaco_obrigatorio:
+	ESPACO_TOKEN {printf("RECONHECENDO ESPACO OBRIGATORIO\n");};
 
-espaco_opcional: ESPACO_TOKEN {printf("RECONHECENDO ESPACO OPCIONAL\n");}
-				| {};
+espaco_opcional:
+	ESPACO_TOKEN {printf("RECONHECENDO ESPACO OPCIONAL\n");} | {};
 
 
 
