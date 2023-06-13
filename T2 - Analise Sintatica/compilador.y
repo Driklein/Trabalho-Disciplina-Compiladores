@@ -111,6 +111,7 @@ numero:
 
 declaracao: 
 	tipo espaco_obrigatorio variavel espaco_opcional ponto_virgula {printf("RECONHECENDO DECLARACAO\n"); };
+	| tipo espaco_obrigatorio atribuicao {printf("RECONHECENDO DECLARACAO INICIALIZANDO\n"); };
 
 atribuicao:
 	variavel espaco_opcional igual espaco_opcional valor espaco_opcional ponto_virgula{printf("RECONHECENDO ATRIBUICAO VALOR\n");}
@@ -118,13 +119,13 @@ atribuicao:
 	
 expressao:
 	expressao mais expressao{printf("RECONHECENDO EXPRESSAO SOMA");}
-	| expressao espaco_opcional menos espaco_opcional expressao espaco_opcional{printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
-	| expressao espaco_opcional vezes espaco_opcional expressao espaco_opcional{printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
-	| expressao espaco_opcional dividido espaco_opcional expressao espaco_opcional{printf("RECONHECENDO EXPRESSAO DIVISAO");}
-	| numero espaco_opcional mais espaco_opcional numero espaco_opcional{printf("RECONHECENDO EXPRESSAO SOMA");}
-	| numero espaco_opcional menos espaco_opcional numero espaco_opcional{printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
-	| numero espaco_opcional vezes espaco_opcional numero espaco_opcional{printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
-	| numero espaco_opcional dividido espaco_opcional numero espaco_opcional{printf("RECONHECENDO EXPRESSAO DIVISAO");};
+	| expressao espaco_opcional menos espaco_opcional expressao espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
+	| expressao espaco_opcional vezes espaco_opcional expressao espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
+	| expressao espaco_opcional dividido espaco_opcional expressao espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO DIVISAO");}
+	| numero espaco_opcional mais espaco_opcional numero espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO SOMA");}
+	| numero espaco_opcional menos espaco_opcional numero espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
+	| numero espaco_opcional vezes espaco_opcional numero espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
+	| numero espaco_opcional dividido espaco_opcional numero espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO DIVISAO");};
 
 mais:
 	SOMA_TOKEN{printf("RECONHECENDO SOMA\n");};
