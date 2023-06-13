@@ -126,6 +126,10 @@ expressao:
 	| numero espaco_opcional menos espaco_opcional numero espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
 	| numero espaco_opcional vezes espaco_opcional numero espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
 	| numero espaco_opcional dividido espaco_opcional numero espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO DIVISAO");};
+	| variavel espaco_opcional mais espaco_opcional variavel espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO SOMA");}
+	| variavel espaco_opcional menos espaco_opcional variavel espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
+	| variavel espaco_opcional vezes espaco_opcional variavel espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
+	| variavel espaco_opcional dividido espaco_opcional variavel espaco_opcional ponto_virgula{printf("RECONHECENDO EXPRESSAO DIVISAO");};
 
 mais:
 	SOMA_TOKEN{printf("RECONHECENDO SOMA\n");};

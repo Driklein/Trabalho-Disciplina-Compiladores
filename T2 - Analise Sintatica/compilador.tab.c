@@ -478,16 +478,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  14
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   76
+#define YYLAST   112
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  20
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  18
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  40
+#define YYNRULES  44
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  78
+#define YYNSTATES  107
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   319
@@ -542,9 +542,9 @@ static const yytype_uint8 yyrline[] =
 {
        0,    92,    92,    95,    96,    97,    98,    99,   102,   103,
      104,   105,   106,   109,   110,   113,   114,   117,   118,   121,
-     122,   123,   124,   125,   126,   127,   128,   131,   133,   135,
-     137,   141,   144,   145,   146,   147,   150,   153,   156,   159,
-     159
+     122,   123,   124,   125,   126,   127,   128,   129,   130,   131,
+     132,   135,   137,   139,   141,   145,   148,   149,   150,   151,
+     154,   157,   160,   163,   163
 };
 #endif
 
@@ -575,7 +575,7 @@ static const yytype_int16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF (-38)
+#define YYPACT_NINF (-40)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -589,14 +589,17 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      40,   -38,   -38,   -38,   -38,   -38,   -38,     5,   -38,    40,
-      40,     4,    28,   -38,   -38,   -38,   -38,   -38,    42,    50,
-     -38,    28,   -38,    28,    -4,    17,   -38,   -38,    15,    33,
-     -38,   -38,   -38,    28,    28,     2,    65,    44,   -38,    57,
-      -1,   -38,   -38,   -38,   -38,    28,    28,    28,    28,   -38,
-     -38,     2,    28,    28,    28,   -38,    57,    57,    57,    57,
-      -5,    57,    57,    57,    28,    28,    28,    28,     2,     2,
-       2,   -38,   -38,   -38,   -38,    -5,    -5,    -5
+      95,   -40,   -40,   -40,   -40,   -40,   -40,    14,   -40,    95,
+      95,    29,    59,   -40,   -40,   -40,   -40,   -40,    28,    45,
+     -40,    59,   -40,    59,    -3,    55,   -40,   -40,    21,    42,
+     -40,   -40,   -40,    59,    59,    -1,    59,    69,    90,   -40,
+       9,    27,    90,   -40,   -40,   -40,   -40,    59,    59,    59,
+      59,   -40,   -40,    -1,    59,    59,    59,   -40,    59,    59,
+      59,    59,    -5,    -5,    -5,    -5,    23,     9,     9,     9,
+      28,    28,    28,    28,    59,    59,    59,    59,    -1,    -1,
+      -1,    59,    59,    59,    59,    69,    69,    69,    69,    27,
+      27,    27,    69,    69,    69,    69,   -40,   -40,   -40,   -40,
+     -40,   -40,   -40,   -40,   -40,   -40,   -40
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -604,28 +607,31 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-      40,    36,    39,    32,    33,    34,    35,     0,     2,     3,
-       5,     0,    40,     7,     1,     4,     6,    38,     0,     0,
-      16,    40,    37,    40,     0,     0,    31,    15,    13,    14,
-      10,    12,    11,    40,    40,    40,     0,     0,    27,     0,
-       0,    17,    29,    28,    30,    40,    40,    40,    40,    13,
-      14,    19,    40,    40,    40,    18,     0,     0,     0,     0,
-       0,     0,     0,     0,    40,    40,    40,    40,    40,    40,
-      40,    23,    24,    25,    26,    20,    21,    22
+      44,    40,    43,    36,    37,    38,    39,     0,     2,     3,
+       5,     0,    44,     7,     1,     4,     6,    42,     0,     0,
+      16,    44,    41,    44,     0,     0,    35,    15,    13,    14,
+      10,    12,    11,    44,    44,    44,    44,     0,     0,    31,
+       0,     0,     0,    17,    33,    32,    34,    44,    44,    44,
+      44,    13,    14,    19,    44,    44,    44,    18,    44,    44,
+      44,    44,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,    44,    44,    44,    44,    44,    44,
+      44,    44,    44,    44,    44,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,    23,    24,    25,    26,
+      20,    21,    22,    27,    28,    29,    30
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -38,   -38,    41,   -38,     7,   -38,    53,   -37,    35,    36,
-      37,    38,   -33,   -38,    58,   -38,   -38,   -12
+     -40,   -40,    43,   -40,    47,   -40,    68,   -39,   -34,   -31,
+     -21,   -15,     2,   -40,     0,   -40,   -40,     1
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     7,     8,    33,    34,     9,    10,    35,    39,    52,
-      53,    54,    27,    11,    12,    23,    18,    13
+      -1,     7,     8,    33,    34,     9,    10,    35,    40,    54,
+      55,    56,    27,    11,    36,    23,    18,    13
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -633,26 +639,34 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      19,    26,    51,    41,    26,    14,     2,    55,    17,    24,
-      42,    25,    43,    44,    42,    22,    43,    44,    38,    -8,
-      -8,    36,    37,    40,    68,    69,    70,    28,    29,    30,
-      31,    32,     2,    56,    57,    58,    59,    -9,    -9,    60,
-      61,    62,    63,     1,     2,     1,     3,     4,     5,     6,
-      15,    16,    71,    72,    73,    74,    75,    76,    77,    42,
-      38,    43,    44,    64,    65,    66,    67,    49,    50,    22,
-      26,    20,    45,    46,    47,    48,    21
+      12,    53,    26,     2,    47,    51,    52,    48,    58,    12,
+      12,    59,     1,    19,    14,    39,    22,    49,    21,    51,
+      52,    60,    24,    50,    25,    -8,    -8,    61,    78,    79,
+      80,     1,    26,    17,    37,    38,    41,    42,    44,    43,
+      45,    46,    44,    57,    45,    46,    -9,    -9,    62,    63,
+      64,    65,    15,    16,    66,    67,    68,    69,     1,    70,
+      71,    72,    73,     2,    22,    28,    29,    30,    31,    32,
+      81,    82,    83,    84,    26,    85,    86,    87,    88,    89,
+      90,    91,    92,    93,    94,    95,    20,    96,    97,    98,
+      99,   100,   101,   102,   103,   104,   105,   106,     1,     2,
+       0,     3,     4,     5,     6,    44,    39,    45,    46,    74,
+      75,    76,    77
 };
 
 static const yytype_int8 yycheck[] =
 {
-      12,     5,    39,    36,     5,     0,     4,    40,     4,    21,
-      15,    23,    17,    18,    15,    19,    17,    18,    16,     4,
-       5,    33,    34,    35,    61,    62,    63,    10,    11,    12,
-      13,    14,     4,    45,    46,    47,    48,     4,     5,    51,
-      52,    53,    54,     3,     4,     3,     6,     7,     8,     9,
-       9,    10,    64,    65,    66,    67,    68,    69,    70,    15,
-      16,    17,    18,    56,    57,    58,    59,    10,    11,    19,
-       5,    18,    37,    37,    37,    37,    18
+       0,    40,     5,     4,    38,    10,    11,    38,    42,     9,
+      10,    42,     3,    12,     0,    16,    19,    38,    18,    10,
+      11,    42,    21,    38,    23,     4,     5,    42,    67,    68,
+      69,     3,     5,     4,    33,    34,    35,    36,    15,    37,
+      17,    18,    15,    41,    17,    18,     4,     5,    47,    48,
+      49,    50,     9,    10,    53,    54,    55,    56,     3,    58,
+      59,    60,    61,     4,    19,    10,    11,    12,    13,    14,
+      70,    71,    72,    73,     5,    74,    75,    76,    77,    78,
+      79,    80,    81,    82,    83,    84,    18,    85,    86,    87,
+      88,    89,    90,    91,    92,    93,    94,    95,     3,     4,
+      -1,     6,     7,     8,     9,    15,    16,    17,    18,    62,
+      63,    64,    65
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -662,11 +676,14 @@ static const yytype_int8 yystos[] =
        0,     3,     4,     6,     7,     8,     9,    21,    22,    25,
       26,    33,    34,    37,     0,    22,    22,     4,    36,    37,
       26,    34,    19,    35,    37,    37,     5,    32,    10,    11,
-      12,    13,    14,    23,    24,    27,    37,    37,    16,    28,
-      37,    32,    15,    17,    18,    28,    29,    30,    31,    10,
-      11,    27,    29,    30,    31,    32,    37,    37,    37,    37,
+      12,    13,    14,    23,    24,    27,    34,    37,    37,    16,
+      28,    37,    37,    32,    15,    17,    18,    28,    29,    30,
+      31,    10,    11,    27,    29,    30,    31,    32,    28,    29,
+      30,    31,    37,    37,    37,    37,    37,    37,    37,    37,
       37,    37,    37,    37,    24,    24,    24,    24,    27,    27,
-      27,    37,    37,    37,    37,    37,    37,    37
+      27,    34,    34,    34,    34,    37,    37,    37,    37,    37,
+      37,    37,    37,    37,    37,    37,    32,    32,    32,    32,
+      32,    32,    32,    32,    32,    32,    32
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -674,9 +691,9 @@ static const yytype_int8 yyr1[] =
 {
        0,    20,    21,    22,    22,    22,    22,    22,    23,    23,
       23,    23,    23,    24,    24,    25,    25,    26,    26,    27,
-      27,    27,    27,    27,    27,    27,    27,    28,    29,    30,
-      31,    32,    33,    33,    33,    33,    34,    35,    36,    37,
-      37
+      27,    27,    27,    27,    27,    27,    27,    27,    27,    27,
+      27,    28,    29,    30,    31,    32,    33,    33,    33,    33,
+      34,    35,    36,    37,    37
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -684,9 +701,9 @@ static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     1,     2,     1,     2,     1,     1,     1,
        1,     1,     1,     1,     1,     5,     3,     7,     7,     3,
-       6,     6,     6,     6,     6,     6,     6,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       0
+       7,     7,     7,     7,     7,     7,     7,     7,     7,     7,
+       7,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     0
 };
 
 
@@ -1384,239 +1401,263 @@ yyreduce:
   case 2:
 #line 92 "compilador.y"
           {}
-#line 1388 "compilador.tab.c"
+#line 1405 "compilador.tab.c"
     break;
 
   case 3:
 #line 95 "compilador.y"
                   {printf("DECLARACAO FINAL\n");}
-#line 1394 "compilador.tab.c"
+#line 1411 "compilador.tab.c"
     break;
 
   case 4:
 #line 96 "compilador.y"
                          {printf("DECLARACAO  ACAO\n");}
-#line 1400 "compilador.tab.c"
+#line 1417 "compilador.tab.c"
     break;
 
   case 5:
 #line 97 "compilador.y"
                     {printf("ATRIBUICAO FINAL\n");}
-#line 1406 "compilador.tab.c"
+#line 1423 "compilador.tab.c"
     break;
 
   case 6:
 #line 98 "compilador.y"
                          {printf("ATRIBUICAO ACAO\n");}
-#line 1412 "compilador.tab.c"
+#line 1429 "compilador.tab.c"
     break;
 
   case 7:
 #line 99 "compilador.y"
                          {}
-#line 1418 "compilador.tab.c"
+#line 1435 "compilador.tab.c"
     break;
 
   case 8:
 #line 102 "compilador.y"
                        {printf("RECONHECENDO VALOR INTEIRO\n");}
-#line 1424 "compilador.tab.c"
+#line 1441 "compilador.tab.c"
     break;
 
   case 9:
 #line 103 "compilador.y"
                            {printf("RECONHECENDO VALOR FLOAT\n");}
-#line 1430 "compilador.tab.c"
+#line 1447 "compilador.tab.c"
     break;
 
   case 10:
 #line 104 "compilador.y"
                           {printf("RECONHECENDO VALOR CHAR\n");}
-#line 1436 "compilador.tab.c"
+#line 1453 "compilador.tab.c"
     break;
 
   case 11:
 #line 105 "compilador.y"
                             {printf("RECONHECENDO VALOR STRING\n");}
-#line 1442 "compilador.tab.c"
+#line 1459 "compilador.tab.c"
     break;
 
   case 12:
 #line 106 "compilador.y"
                           {printf("RECONHECENDO VALOR BOOL\n");}
-#line 1448 "compilador.tab.c"
+#line 1465 "compilador.tab.c"
     break;
 
   case 13:
 #line 109 "compilador.y"
                        {printf("RECONHECENDO NUMERO INTEIRO\n");}
-#line 1454 "compilador.tab.c"
+#line 1471 "compilador.tab.c"
     break;
 
   case 14:
 #line 110 "compilador.y"
                            {printf("RECONHECENDO NUMERO FLOAT\n");}
-#line 1460 "compilador.tab.c"
+#line 1477 "compilador.tab.c"
     break;
 
   case 15:
 #line 113 "compilador.y"
                                                                        {printf("RECONHECENDO DECLARACAO\n"); }
-#line 1466 "compilador.tab.c"
+#line 1483 "compilador.tab.c"
     break;
 
   case 16:
 #line 114 "compilador.y"
                                              {printf("RECONHECENDO DECLARACAO INICIALIZANDO\n"); }
-#line 1472 "compilador.tab.c"
+#line 1489 "compilador.tab.c"
     break;
 
   case 17:
 #line 117 "compilador.y"
                                                                                           {printf("RECONHECENDO ATRIBUICAO VALOR\n");}
-#line 1478 "compilador.tab.c"
+#line 1495 "compilador.tab.c"
     break;
 
   case 18:
 #line 118 "compilador.y"
                                                                                                {printf("RECONHECENDO ATRIBUICAO EXPRESSAO\n");}
-#line 1484 "compilador.tab.c"
+#line 1501 "compilador.tab.c"
     break;
 
   case 19:
 #line 121 "compilador.y"
                                 {printf("RECONHECENDO EXPRESSAO SOMA");}
-#line 1490 "compilador.tab.c"
+#line 1507 "compilador.tab.c"
     break;
 
   case 20:
 #line 122 "compilador.y"
-                                                                                   {printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
-#line 1496 "compilador.tab.c"
+                                                                                                 {printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
+#line 1513 "compilador.tab.c"
     break;
 
   case 21:
 #line 123 "compilador.y"
-                                                                                   {printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
-#line 1502 "compilador.tab.c"
+                                                                                                 {printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
+#line 1519 "compilador.tab.c"
     break;
 
   case 22:
 #line 124 "compilador.y"
-                                                                                      {printf("RECONHECENDO EXPRESSAO DIVISAO");}
-#line 1508 "compilador.tab.c"
+                                                                                                    {printf("RECONHECENDO EXPRESSAO DIVISAO");}
+#line 1525 "compilador.tab.c"
     break;
 
   case 23:
 #line 125 "compilador.y"
-                                                                            {printf("RECONHECENDO EXPRESSAO SOMA");}
-#line 1514 "compilador.tab.c"
+                                                                                          {printf("RECONHECENDO EXPRESSAO SOMA");}
+#line 1531 "compilador.tab.c"
     break;
 
   case 24:
 #line 126 "compilador.y"
-                                                                             {printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
-#line 1520 "compilador.tab.c"
+                                                                                           {printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
+#line 1537 "compilador.tab.c"
     break;
 
   case 25:
 #line 127 "compilador.y"
-                                                                             {printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
-#line 1526 "compilador.tab.c"
+                                                                                           {printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
+#line 1543 "compilador.tab.c"
     break;
 
   case 26:
 #line 128 "compilador.y"
-                                                                                {printf("RECONHECENDO EXPRESSAO DIVISAO");}
-#line 1532 "compilador.tab.c"
+                                                                                              {printf("RECONHECENDO EXPRESSAO DIVISAO");}
+#line 1549 "compilador.tab.c"
     break;
 
   case 27:
-#line 131 "compilador.y"
-                  {printf("RECONHECENDO SOMA\n");}
-#line 1538 "compilador.tab.c"
+#line 129 "compilador.y"
+                                                                                              {printf("RECONHECENDO EXPRESSAO SOMA");}
+#line 1555 "compilador.tab.c"
     break;
 
   case 28:
-#line 133 "compilador.y"
-                       {printf("RECONHECENDO SOMA\n");}
-#line 1544 "compilador.tab.c"
+#line 130 "compilador.y"
+                                                                                               {printf("RECONHECENDO EXPRESSAO SUBTRACAO");}
+#line 1561 "compilador.tab.c"
     break;
 
   case 29:
-#line 135 "compilador.y"
-                           {printf("RECONHECENDO SOMA\n");}
-#line 1550 "compilador.tab.c"
+#line 131 "compilador.y"
+                                                                                               {printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");}
+#line 1567 "compilador.tab.c"
     break;
 
   case 30:
-#line 137 "compilador.y"
-                     {printf("RECONHECENDO SOMA\n");}
-#line 1556 "compilador.tab.c"
+#line 132 "compilador.y"
+                                                                                                  {printf("RECONHECENDO EXPRESSAO DIVISAO");}
+#line 1573 "compilador.tab.c"
     break;
 
   case 31:
-#line 141 "compilador.y"
-                           {printf("RECONHECENDO PONTO E VIRGULA\n");}
-#line 1562 "compilador.tab.c"
+#line 135 "compilador.y"
+                  {printf("RECONHECENDO SOMA\n");}
+#line 1579 "compilador.tab.c"
     break;
 
   case 32:
-#line 144 "compilador.y"
-                       {printf("RECONHECENDO TIPO INT\n");}
-#line 1568 "compilador.tab.c"
+#line 137 "compilador.y"
+                       {printf("RECONHECENDO SOMA\n");}
+#line 1585 "compilador.tab.c"
     break;
 
   case 33:
-#line 145 "compilador.y"
-                           {printf("RECONHECENDO TIPO FLOAT\n");}
-#line 1574 "compilador.tab.c"
+#line 139 "compilador.y"
+                           {printf("RECONHECENDO SOMA\n");}
+#line 1591 "compilador.tab.c"
     break;
 
   case 34:
-#line 146 "compilador.y"
-                         {printf("RECONHECENDO TIPO CHAR\n");}
-#line 1580 "compilador.tab.c"
+#line 141 "compilador.y"
+                     {printf("RECONHECENDO SOMA\n");}
+#line 1597 "compilador.tab.c"
     break;
 
   case 35:
-#line 147 "compilador.y"
-                          {printf("RECONHECENDO TIPO BOOL\n");}
-#line 1586 "compilador.tab.c"
+#line 145 "compilador.y"
+                           {printf("RECONHECENDO PONTO E VIRGULA\n");}
+#line 1603 "compilador.tab.c"
     break;
 
   case 36:
-#line 150 "compilador.y"
-                      {printf("RECONHECENDO VARIAVEL\n");}
-#line 1592 "compilador.tab.c"
+#line 148 "compilador.y"
+                       {printf("RECONHECENDO TIPO INT\n");}
+#line 1609 "compilador.tab.c"
     break;
 
   case 37:
-#line 153 "compilador.y"
-                   {printf("RECONHECENDO IGUAL\n");}
-#line 1598 "compilador.tab.c"
+#line 149 "compilador.y"
+                           {printf("RECONHECENDO TIPO FLOAT\n");}
+#line 1615 "compilador.tab.c"
     break;
 
   case 38:
-#line 156 "compilador.y"
-                     {printf("RECONHECENDO ESPACO OBRIGATORIO\n");}
-#line 1604 "compilador.tab.c"
+#line 150 "compilador.y"
+                         {printf("RECONHECENDO TIPO CHAR\n");}
+#line 1621 "compilador.tab.c"
     break;
 
   case 39:
-#line 159 "compilador.y"
-                     {printf("RECONHECENDO ESPACO OPCIONAL\n");}
-#line 1610 "compilador.tab.c"
+#line 151 "compilador.y"
+                          {printf("RECONHECENDO TIPO BOOL\n");}
+#line 1627 "compilador.tab.c"
     break;
 
   case 40:
-#line 159 "compilador.y"
+#line 154 "compilador.y"
+                      {printf("RECONHECENDO VARIAVEL\n");}
+#line 1633 "compilador.tab.c"
+    break;
+
+  case 41:
+#line 157 "compilador.y"
+                   {printf("RECONHECENDO IGUAL\n");}
+#line 1639 "compilador.tab.c"
+    break;
+
+  case 42:
+#line 160 "compilador.y"
+                     {printf("RECONHECENDO ESPACO OBRIGATORIO\n");}
+#line 1645 "compilador.tab.c"
+    break;
+
+  case 43:
+#line 163 "compilador.y"
+                     {printf("RECONHECENDO ESPACO OPCIONAL\n");}
+#line 1651 "compilador.tab.c"
+    break;
+
+  case 44:
+#line 163 "compilador.y"
                                                                    {}
-#line 1616 "compilador.tab.c"
+#line 1657 "compilador.tab.c"
     break;
 
 
-#line 1620 "compilador.tab.c"
+#line 1661 "compilador.tab.c"
 
       default: break;
     }
@@ -1848,5 +1889,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 163 "compilador.y"
+#line 167 "compilador.y"
 

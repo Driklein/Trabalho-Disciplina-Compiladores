@@ -1,1 +1,6 @@
 
+float x;
+x = 10.2;
+float y = 20.3;
+float z;
+z = x + y;
