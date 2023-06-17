@@ -140,70 +140,75 @@ valor:
 
 
 declaracao: 
-	tipo variavel ponto_virgula { printf("RECONHECENDO DECLARACAO\n"); 
-
+	tipo variavel ponto_virgula { 
+		printf("RECONHECENDO DECLARACAO\n");
+		$$ = create_node(@1.first_line, declaracao_node, "declaracao", $1, $2, $3, NULL); 
 	}
-	| tipo atribuicao{ printf("RECONHECENDO DECLARACAO INICIALIZANDO\n"); 
-		
+	| tipo atribuicao{ 
+		printf("RECONHECENDO DECLARACAO INICIALIZANDO\n"); 
+		$$ = create_node(@1.first_line, atribuicao_node, "atribuicao", $1, $2, NULL);
 	};
 
 atribuicao:
-	variavel  igual  valor ponto_virgula { printf("RECONHECENDO ATRIBUICAO VALOR\n");
-		
+	variavel  igual  valor ponto_virgula { 
+		printf("RECONHECENDO ATRIBUICAO VALOR\n");
+		$$ = create_node(@1.first_line, atribuicao_node, "atribuicao", $1, $2, $3, NULL);	
 	}
 	| variavel  igual  expressao{
 		printf("RECONHECENDO ATRIBUICAO EXPRESSAO\n");
+		$$ = create_node(@1.first_line, atribuicao_node, "atribuicao", $1, $2, $3, NULL);
 	
 	};
 
 expressao:
 	expressao mais expressao ponto_virgula{
 		printf("RECONHECENDO EXPRESSAO SOMA");	
+		$$ = create_node(@1.first_line, expressao_node, "expressao", $1, $2, $3, $4, NULL);
 	}
 	| expressao  menos  expressao ponto_virgula{
 		printf("RECONHECENDO EXPRESSAO SUBTRACAO");
-		$$ = create_node(@1.first_line, expressao, "expressao", $1, $2, $3, $4, NULL);
+		$$ = create_node(@1.first_line, expressao_node, "expressao", $1, $2, $3, $4, NULL);
 	}
 	| expressao  vezes  expressao ponto_virgula{
 		printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");
-		$$ = create_node(@1.first_line, expressao, "expressao", $1, $2, $3, $4, NULL);
+		$$ = create_node(@1.first_line, expressao_node, "expressao", $1, $2, $3, $4, NULL);
 	}
 	| expressao  dividido  expressao  ponto_virgula{
 		printf("RECONHECENDO EXPRESSAO DIVISAO");
-		$$ = create_node(@1.first_line, expressao, "expressao", $1, $2, $3, $4, NULL);
+		$$ = create_node(@1.first_line, expressao_node, "expressao", $1, $2, $3, $4, NULL);
 	}
 	| valor  mais  valor ponto_virgula{
 		printf("RECONHECENDO EXPRESSAO SOMA");
-		$$ = create_node(@1.first_line, expressao, "expressao", $1, $2, $3, $4, NULL);
+		$$ = create_node(@1.first_line, expressao_node, "expressao", $1, $2, $3, $4, NULL);
 	}
 	| valor  menos  valor ponto_virgula{
 		printf("RECONHECENDO EXPRESSAO SUBTRACAO");
-		$$ = create_node(@1.first_line, expressao, "expressao", $1, $2, $3, $4, NULL);
+		$$ = create_node(@1.first_line, expressao_node, "expressao", $1, $2, $3, $4, NULL);
 	}
 	| valor  vezes  valor ponto_virgula{
 		printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");
-		$$ = create_node(@1.first_line, expressao, "expressao", $1, $2, $3, $4, NULL);
+		$$ = create_node(@1.first_line, expressao_node, "expressao", $1, $2, $3, $4, NULL);
 	}
 	| valor  dividido  valor ponto_virgula{
 		printf("RECONHECENDO EXPRESSAO DIVISAO");
-		$$ = create_node(@1.first_line, expressao, "expressao", $1, $2, $3, $4, NULL);
+		$$ = create_node(@1.first_line, expressao_node, "expressao", $1, $2, $3, $4, NULL);
 	}
 	| variavel  mais  variavel ponto_virgula{
 		printf("RECONHECENDO EXPRESSAO SOMA");
-		$$ = create_node(@1.first_line, expressao, "expressao", $1, $2, $3, $4, NULL);
+		$$ = create_node(@1.first_line, expressao_node, "expressao", $1, $2, $3, $4, NULL);
 	}
 	| variavel  menos  variavel ponto_virgula{
 		printf("RECONHECENDO EXPRESSAO SUBTRACAO");
-		$$ = create_node(@1.first_line, expressao, "expressao", $1, $2, $3, $4, NULL);
+		$$ = create_node(@1.first_line, expressao_node, "expressao", $1, $2, $3, $4, NULL);
 	}
 	| variavel  vezes  variavel ponto_virgula{
 		printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");
-		$$ = create_node(@1.first_line, expressao, "expressao", $1, $2, $3, $4, NULL);
+		$$ = create_node(@1.first_line, expressao_node, "expressao", $1, $2, $3, $4, NULL);
 		
 	}
 	| variavel  dividido  variavel ponto_virgula{
 		printf("RECONHECENDO EXPRESSAO DIVISAO");
-		$$ = create_node(@1.first_line, expressao, "expressao", $1, $2, $3, $4, NULL);
+		$$ = create_node(@1.first_line, expressao_node, "expressao", $1, $2, $3, $4, NULL);
 	};
 
 mais:

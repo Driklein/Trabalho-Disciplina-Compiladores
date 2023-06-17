@@ -554,12 +554,12 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
        0,    98,    98,   105,   110,   114,   118,   122,   125,   128,
-     131,   134,   137,   143,   146,   151,   154,   160,   163,   166,
-     169,   172,   175,   178,   181,   184,   187,   191,   195,   201,
-     206,   212,   217,   224,   230,   234,   238,   242,   248,   254
+     131,   134,   137,   143,   147,   153,   157,   164,   168,   172,
+     176,   180,   184,   188,   192,   196,   200,   204,   209,   215,
+     220,   226,   231,   238,   244,   248,   252,   256,   262,   268
 };
 #endif
 
@@ -1583,238 +1583,252 @@ yyreduce:
 
   case 13:
 #line 143 "compilador.y"
-                                    { printf("RECONHECENDO DECLARACAO\n"); 
-
+                                    { 
+		printf("RECONHECENDO DECLARACAO\n");
+		(yyval.node) = create_node((yylsp[-2]).first_line, declaracao_node, "declaracao", (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL); 
 	}
-#line 1590 "compilador.tab.c"
+#line 1591 "compilador.tab.c"
     break;
 
   case 14:
-#line 146 "compilador.y"
-                         { printf("RECONHECENDO DECLARACAO INICIALIZANDO\n"); 
-		
+#line 147 "compilador.y"
+                         { 
+		printf("RECONHECENDO DECLARACAO INICIALIZANDO\n"); 
+		(yyval.node) = create_node((yylsp[-1]).first_line, atribuicao_node, "atribuicao", (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1598 "compilador.tab.c"
+#line 1600 "compilador.tab.c"
     break;
 
   case 15:
-#line 151 "compilador.y"
-                                             { printf("RECONHECENDO ATRIBUICAO VALOR\n");
-		
+#line 153 "compilador.y"
+                                             { 
+		printf("RECONHECENDO ATRIBUICAO VALOR\n");
+		(yyval.node) = create_node((yylsp[-3]).first_line, atribuicao_node, "atribuicao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), NULL);	
 	}
-#line 1606 "compilador.tab.c"
+#line 1609 "compilador.tab.c"
     break;
 
   case 16:
-#line 154 "compilador.y"
+#line 157 "compilador.y"
                                     {
 		printf("RECONHECENDO ATRIBUICAO EXPRESSAO\n");
+		(yyval.node) = create_node((yylsp[-2]).first_line, atribuicao_node, "atribuicao", (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	
 	}
-#line 1615 "compilador.tab.c"
+#line 1619 "compilador.tab.c"
     break;
 
   case 17:
-#line 160 "compilador.y"
+#line 164 "compilador.y"
                                               {
 		printf("RECONHECENDO EXPRESSAO SOMA");	
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1623 "compilador.tab.c"
+#line 1628 "compilador.tab.c"
     break;
 
   case 18:
-#line 163 "compilador.y"
+#line 168 "compilador.y"
                                                    {
 		printf("RECONHECENDO EXPRESSAO SUBTRACAO");
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1631 "compilador.tab.c"
+#line 1637 "compilador.tab.c"
     break;
 
   case 19:
-#line 166 "compilador.y"
+#line 172 "compilador.y"
                                                    {
 		printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1639 "compilador.tab.c"
+#line 1646 "compilador.tab.c"
     break;
 
   case 20:
-#line 169 "compilador.y"
+#line 176 "compilador.y"
                                                        {
 		printf("RECONHECENDO EXPRESSAO DIVISAO");
-	}
-#line 1647 "compilador.tab.c"
-    break;
-
-  case 21:
-#line 172 "compilador.y"
-                                          {
-		printf("RECONHECENDO EXPRESSAO SOMA");
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
 #line 1655 "compilador.tab.c"
     break;
 
+  case 21:
+#line 180 "compilador.y"
+                                          {
+		printf("RECONHECENDO EXPRESSAO SOMA");
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+	}
+#line 1664 "compilador.tab.c"
+    break;
+
   case 22:
-#line 175 "compilador.y"
+#line 184 "compilador.y"
                                            {
 		printf("RECONHECENDO EXPRESSAO SUBTRACAO");
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1663 "compilador.tab.c"
+#line 1673 "compilador.tab.c"
     break;
 
   case 23:
-#line 178 "compilador.y"
+#line 188 "compilador.y"
                                            {
 		printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1671 "compilador.tab.c"
+#line 1682 "compilador.tab.c"
     break;
 
   case 24:
-#line 181 "compilador.y"
+#line 192 "compilador.y"
                                               {
 		printf("RECONHECENDO EXPRESSAO DIVISAO");
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1679 "compilador.tab.c"
+#line 1691 "compilador.tab.c"
     break;
 
   case 25:
-#line 184 "compilador.y"
+#line 196 "compilador.y"
                                                 {
 		printf("RECONHECENDO EXPRESSAO SOMA");
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1687 "compilador.tab.c"
+#line 1700 "compilador.tab.c"
     break;
 
   case 26:
-#line 187 "compilador.y"
+#line 200 "compilador.y"
                                                  {
 		printf("RECONHECENDO EXPRESSAO SUBTRACAO");
-		
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1696 "compilador.tab.c"
+#line 1709 "compilador.tab.c"
     break;
 
   case 27:
-#line 191 "compilador.y"
+#line 204 "compilador.y"
                                                  {
 		printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 		
 	}
-#line 1705 "compilador.tab.c"
+#line 1719 "compilador.tab.c"
     break;
 
   case 28:
-#line 195 "compilador.y"
+#line 209 "compilador.y"
                                                     {
 		printf("RECONHECENDO EXPRESSAO DIVISAO");
-		//$$ = create_node(@1.first_line, expressao, "expressao", $1,  $3 NULL);
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1714 "compilador.tab.c"
+#line 1728 "compilador.tab.c"
     break;
 
   case 29:
-#line 201 "compilador.y"
+#line 215 "compilador.y"
                   {
 		printf("RECONHECENDO SOMA\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, soma_node, "soma", NULL);
 }
-#line 1723 "compilador.tab.c"
+#line 1737 "compilador.tab.c"
     break;
 
   case 30:
-#line 206 "compilador.y"
+#line 220 "compilador.y"
                        {
 		printf("RECONHECENDO SUBTRACAO\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, subtracao_node, "subtracao", NULL);
 
 }
-#line 1733 "compilador.tab.c"
+#line 1747 "compilador.tab.c"
     break;
 
   case 31:
-#line 212 "compilador.y"
+#line 226 "compilador.y"
                            {
 		printf("RECONHECENDO MULTIPLICACAO\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, multiplicacao_node, "multiplicacao", NULL);
 	}
-#line 1742 "compilador.tab.c"
+#line 1756 "compilador.tab.c"
     break;
 
   case 32:
-#line 217 "compilador.y"
+#line 231 "compilador.y"
                      {
 		printf("RECONHECENDO DIVISAO\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, divisao_node, "divisao", NULL);		
 	}
-#line 1751 "compilador.tab.c"
+#line 1765 "compilador.tab.c"
     break;
 
   case 33:
-#line 224 "compilador.y"
+#line 238 "compilador.y"
                            {
 		printf("RECONHECENDO PONTO E VIRGULA\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, ponto_virgula_node, "ponto_virgula", NULL);	
 	}
-#line 1760 "compilador.tab.c"
+#line 1774 "compilador.tab.c"
     break;
 
   case 34:
-#line 230 "compilador.y"
+#line 244 "compilador.y"
                        {
 		printf("RECONHECENDO TIPO INT\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, int_tipo_node, "int", NULL);	
 	}
-#line 1769 "compilador.tab.c"
+#line 1783 "compilador.tab.c"
     break;
 
   case 35:
-#line 234 "compilador.y"
+#line 248 "compilador.y"
                            {
 		printf("RECONHECENDO TIPO FLOAT\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, float_tipo_node, "float", NULL);	
 	}
-#line 1778 "compilador.tab.c"
+#line 1792 "compilador.tab.c"
     break;
 
   case 36:
-#line 238 "compilador.y"
+#line 252 "compilador.y"
                           {
 		printf("RECONHECENDO TIPO CHAR\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, char_tipo_node, "char", NULL);	
 	}
-#line 1787 "compilador.tab.c"
+#line 1801 "compilador.tab.c"
     break;
 
   case 37:
-#line 242 "compilador.y"
+#line 256 "compilador.y"
                           {
 		printf("RECONHECENDO TIPO BOOL\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, bool_tipo_node, "bool", NULL);	
 	}
-#line 1796 "compilador.tab.c"
+#line 1810 "compilador.tab.c"
     break;
 
   case 38:
-#line 248 "compilador.y"
+#line 262 "compilador.y"
                       {
 		printf("RECONHECENDO VARIAVEL\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, variavel_node, "variavel", NULL);	
 	}
-#line 1805 "compilador.tab.c"
+#line 1819 "compilador.tab.c"
     break;
 
   case 39:
-#line 254 "compilador.y"
+#line 268 "compilador.y"
                    {
 		printf("RECONHECENDO IGUAL\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, igual_node, "igual", NULL);	
 	}
-#line 1814 "compilador.tab.c"
+#line 1828 "compilador.tab.c"
     break;
 
 
-#line 1818 "compilador.tab.c"
+#line 1832 "compilador.tab.c"
 
       default: break;
     }
@@ -2052,5 +2066,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 261 "compilador.y"
+#line 275 "compilador.y"
 
