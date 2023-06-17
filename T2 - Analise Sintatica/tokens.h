@@ -37,8 +37,6 @@
 #define OR 299
 #define LETRA 300
 #define DIGITO 302
-#define NUMERO 303
-#define ESPACO 306
 #define INT_TIPO 309
 #define FLOAT_TIPO 310
 #define CHAR_TIPO 311

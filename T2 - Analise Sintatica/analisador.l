@@ -5,30 +5,22 @@
     #include "compilador.tab.h"
     
 %}
-%option noyywrap 
+%option noyywrap yylineno
 
 LETRA [a-zA-Z]
 VARIAVEL {LETRA}+
 DIGITO [0-9]
-NUMERO {DIGITO}+
-PONTO_FLUTUANTE [\.]{NUMERO}
+PONTO_FLUTUANTE [\.]{DIGITO}+
 
-FLOAT_VALOR {NUMERO}{PONTO_FLUTUANTE}
-INT_VALOR {NUMERO}
-BOOL_VALOR [0][1]
+FLOAT_VALOR {DIGITO}+{PONTO_FLUTUANTE}
+INT_VALOR {DIGITO}+
+BOOL_VALOR [0|1]
 CHAR_VALOR {ASPA}{LETRA}{ASPA}
 STRING_VALOR {ASPA}{LETRA}+{ASPA}
-
-
-ABRE_CHAVES [{]
-FECHA_CHAVES [}]
-ABRE_PARENTESES [(]
-FECHA_PARENTESES [)]
-ABRE_COLCHETES [[]
-FECHA_COLCHETES []]
-
-ESPACO [ ]+
 ASPA ["]
+ESPACO [ ]
+ESPACOS {ESPACO}[\t][\n]
+
 
 %%
 
@@ -78,9 +70,8 @@ ASPA {return(ASPA);}
 
 
 {DIGITO} {return(DIGITO);}
-{NUMERO} {return(NUMERO);}
 {VARIAVEL} {return(VARIAVEL);}
-{ESPACO} {return(ESPACO);}
+{ESPACOS} {}
 
 {INT_VALOR} {return(INT_VALOR);}
 {FLOAT_VALOR} {return(FLOAT_VALOR);}
@@ -92,4 +83,8 @@ ASPA {return(ASPA);}
 [[:^space]]+;
 
 %%
-
+/*
+void main(){
+  printf("Digite o lexema: ");
+  yylex();
+}*/

@@ -50,7 +50,6 @@ extern int yydebug;
   enum yytokentype
   {
     VARIAVEL_TOKEN = 274,
-    ESPACO_TOKEN = 306,
     PONTO_VIRGULA_TOKEN = 283,
     INT_TIPO_TOKEN = 309,
     FLOAT_TIPO_TOKEN = 310,
@@ -78,7 +77,7 @@ union YYSTYPE
 	char* cadeia;
 	struct _node * node;
 
-#line 82 "compilador.tab.h"
+#line 81 "compilador.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -86,9 +85,23 @@ typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
+/* Location type.  */
+#if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
+typedef struct YYLTYPE YYLTYPE;
+struct YYLTYPE
+{
+  int first_line;
+  int first_column;
+  int last_line;
+  int last_column;
+};
+# define YYLTYPE_IS_DECLARED 1
+# define YYLTYPE_IS_TRIVIAL 1
+#endif
+
 
 extern YYSTYPE yylval;
-
+extern YYLTYPE yylloc;
 int yyparse (void);
 
 #endif /* !YY_YY_COMPILADOR_TAB_H_INCLUDED  */

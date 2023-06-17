@@ -1,12 +1,11 @@
-CC = gcc
-LDFLAGS = -g
+
 
 all: main
 
 main: clean lex.yy.c 
-	$(CC) -c node.c
-	$(CC) -c lex.yy.c compilador.tab.c
-	$(CC) -o compilador node.o lex.yy.o compilador.tab.o main.c 
+	gcc -c node.c
+	gcc -c lex.yy.c compilador.tab.c
+	gcc -o compilador node.o lex.yy.o compilador.tab.o main.c 
 
 lex.yy.c: analisador.l tokens.h
 	clear

@@ -26,10 +26,18 @@ typedef int Node_type;
 #define declaracoes_node      299
 #define declaracao_node       300
 #define tipo_node             301
-#define int_node              501
-#define real_node 504
-#define char_node 505
-#define float_node 506
+#define int_tipo_node 302
+#define real_tipo_node 303
+#define char_tipo_node 304
+#define float_tipo_node 305
+#define string_tipo_node 306
+#define bool_tipo_node 307
+#define int_valor_node 501
+#define real_valor_node 504
+#define char_valor_node 505
+#define float_valor_node 506
+#define string_valor_node 308
+#define bool_valor_node 309
 #define acao_node 507
 #define acoes_node 508
 #define atribuicao_node 509
@@ -40,9 +48,8 @@ typedef int Node_type;
 #define divisao_node 515
 #define multiplicacao_node 516
 #define variavel_node 517
-#define pontoevirgula_node 518
+#define ponto_virgula_node 518
 #define expressao_node 519
-
 #define igual_node 520
 
 

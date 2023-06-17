@@ -46,3 +46,4 @@ void yyerror(char* s) {
 	fprintf(stderr, "%s: %s", progname, s);
 	fprintf(stderr, "line %d\n", lineno);
 }
+
