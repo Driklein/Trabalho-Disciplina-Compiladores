@@ -1,5 +1,8 @@
-float x = 5.2;
-int y = 4;
+float x;
+x = 52.4;
+float y = 22.3;
+float z = x + y;
+z = z + x;
 
 
 

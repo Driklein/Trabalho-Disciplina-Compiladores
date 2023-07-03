@@ -1065,39 +1065,52 @@ YY_RULE_SETUP
 {
   yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
   strcpy(yylval.cadeia, yytext);
-  return(INT_VALOR);}
+  return(INT_VALOR);
+}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 81 "analisador.l"
-{return(FLOAT_VALOR);}
+#line 82 "analisador.l"
+{
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(FLOAT_VALOR);}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 82 "analisador.l"
-{return(CHAR_VALOR);}
+#line 86 "analisador.l"
+{
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(CHAR_VALOR);}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 83 "analisador.l"
-{return(STRING_VALOR);}
+#line 90 "analisador.l"
+{
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(STRING_VALOR);}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 84 "analisador.l"
-{return(BOOL_VALOR);}
+#line 94 "analisador.l"
+{
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(BOOL_VALOR);}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 87 "analisador.l"
+#line 100 "analisador.l"
 
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 89 "analisador.l"
+#line 102 "analisador.l"
 ECHO;
 	YY_BREAK
-#line 1101 "lex.yy.c"
+#line 1114 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2114,7 +2127,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 89 "analisador.l"
+#line 102 "analisador.l"
 
 /*
 void main(){
