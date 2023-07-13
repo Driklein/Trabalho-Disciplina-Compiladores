@@ -51,6 +51,18 @@ typedef int Node_type;
 #define ponto_virgula_node 518
 #define expressao_node 519
 #define igual_node 520
+#define condicao_node 521
+#define if_node 522
+#define comparacao_node 523
+#define else_node 524
+#define abre_parenteses_node 525
+#define fecha_parenteses_node 526
+#define abre_chaves_node 527
+#define fecha_chaves_node 528
+#define maior_node 529
+#define menor_node 530
+#define igual_igual_node 531
+#define diferente_node 532
 
 
 /** Estrutura de dados parcial para o no da arvore. */

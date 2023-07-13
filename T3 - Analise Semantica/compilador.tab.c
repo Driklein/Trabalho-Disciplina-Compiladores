@@ -145,7 +145,17 @@ extern int yydebug;
     SOMA_TOKEN = 286,
     SUBTRACAO_TOKEN = 287,
     DIVISAO_TOKEN = 288,
-    IGUAL_TOKEN = 290
+    IGUAL_TOKEN = 290,
+    IF_TOKEN = 522,
+    ELSE_TOKEN = 524,
+    ABRE_PARENTESES_TOKEN = 525,
+    FECHA_PARENTESES_TOKEN = 526,
+    ABRE_CHAVES_TOKEN = 527,
+    FECHA_CHAVES_TOKEN = 528,
+    MAIOR_TOKEN = 529,
+    MENOR_TOKEN = 530,
+    IGUAL_IGUAL_TOKEN = 531,
+    DIFERENTE_TOKEN = 532
   };
 #endif
 
@@ -158,7 +168,7 @@ union YYSTYPE
 	char* cadeia;
 	struct _node * node;
 
-#line 162 "compilador.tab.c"
+#line 172 "compilador.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -492,21 +502,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  12
+#define YYFINAL  15
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   85
+#define YYLAST   110
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  19
+#define YYNTOKENS  29
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  15
+#define YYNNTS  27
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  39
+#define YYNRULES  61
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  71
+#define YYNSTATES  112
 
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   319
+#define YYMAXUTOK   533
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -549,17 +559,42 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     4,     2,    14,    15,    16,    17,     2,
       18,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     5,
-       6,     7,     8,     2,     9,    10,    11,    12,    13,     2
+       6,     7,     8,     2,     9,    10,    11,    12,    13,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,    19,     2,    20,    21,    22,    23,    24,    25,
+      26,    27,    28,     2
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    96,    96,   103,   108,   112,   116,   120,   123,   126,
-     129,   132,   135,   141,   145,   151,   155,   162,   166,   170,
-     174,   178,   182,   186,   190,   194,   198,   202,   207,   213,
-     218,   224,   229,   236,   242,   246,   250,   254,   260,   266
+       0,   116,   116,   123,   128,   132,   136,   140,   144,   148,
+     151,   154,   157,   160,   163,   169,   173,   179,   183,   190,
+     194,   198,   202,   206,   210,   214,   218,   222,   226,   230,
+     235,   241,   246,   254,   259,   264,   269,   274,   279,   284,
+     289,   295,   301,   307,   313,   319,   325,   331,   337,   343,
+     348,   353,   358,   364,   369,   376,   382,   386,   390,   394,
+     400,   406
 };
 #endif
 
@@ -573,8 +608,13 @@ static const char *const yytname[] =
   "BOOL_TIPO_TOKEN", "INT_VALOR_TOKEN", "FLOAT_VALOR_TOKEN",
   "CHAR_VALOR_TOKEN", "BOOL_VALOR_TOKEN", "STRING_VALOR_TOKEN",
   "MULTIPLICACAO_TOKEN", "SOMA_TOKEN", "SUBTRACAO_TOKEN", "DIVISAO_TOKEN",
-  "IGUAL_TOKEN", "$accept", "code", "acao", "valor", "declaracao",
-  "atribuicao", "expressao", "mais", "menos", "vezes", "dividido",
+  "IGUAL_TOKEN", "IF_TOKEN", "ELSE_TOKEN", "ABRE_PARENTESES_TOKEN",
+  "FECHA_PARENTESES_TOKEN", "ABRE_CHAVES_TOKEN", "FECHA_CHAVES_TOKEN",
+  "MAIOR_TOKEN", "MENOR_TOKEN", "IGUAL_IGUAL_TOKEN", "DIFERENTE_TOKEN",
+  "$accept", "code", "acao", "valor", "declaracao", "atribuicao",
+  "expressao", "condicao", "comparacao_if", "abre_chaves", "maior",
+  "menor", "igual_igual", "diferente", "fecha_chaves", "abre_parenteses",
+  "fecha_parenteses", "if", "else", "mais", "menos", "vezes", "dividido",
   "ponto_virgula", "tipo", "variavel", "igual", YY_NULLPTR
 };
 #endif
@@ -584,12 +624,13 @@ static const char *const yytname[] =
    (internal) symbol number NUM (which must be that of a token).  */
 static const yytype_int16 yytoknum[] =
 {
-       0,   256,   319,   274,   283,   309,   310,   311,   312,   314,
-     315,   316,   317,   318,   285,   286,   287,   288,   290
+       0,   256,   533,   274,   283,   309,   310,   311,   312,   314,
+     315,   316,   317,   318,   285,   286,   287,   288,   290,   522,
+     524,   525,   526,   527,   528,   529,   530,   531,   532
 };
 # endif
 
-#define YYPACT_NINF (-26)
+#define YYPACT_NINF (-74)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -603,14 +644,18 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      62,   -26,   -26,   -26,   -26,   -26,     4,   -26,    62,    62,
-       3,     2,   -26,   -26,   -26,   -26,     1,   -26,    51,   -26,
-     -26,   -26,   -26,   -26,   -26,   -26,    42,    64,    64,   -26,
-     -26,   -26,   -26,    63,    63,    63,    63,   -26,    51,    51,
-      51,    51,     3,     3,     3,     3,    21,    21,    21,    21,
-      64,    42,    42,    42,    42,    21,    21,    21,    21,   -26,
-     -26,   -26,   -26,   -26,   -26,   -26,   -26,   -26,   -26,   -26,
-     -26
+       4,   -74,   -74,   -74,   -74,   -74,   -74,     2,   -74,     4,
+       4,     4,   -15,     0,   -13,   -74,   -74,   -74,   -74,   -74,
+      79,   -74,    17,   -74,    79,   -74,   -74,   -74,   -74,   -74,
+       6,     8,    68,   -74,   -74,    64,    83,    83,   -74,   -74,
+     -74,    74,    74,    74,    74,   -74,    25,   -74,     0,     0,
+       0,     0,   -74,   -74,   -74,   -74,    74,    74,    74,    74,
+     -74,    79,    79,    79,    79,     0,     0,     0,     0,   -74,
+     -74,   -74,   -74,   -74,     4,   -74,   -74,   -74,   -74,    59,
+      59,    59,    59,    83,    64,    64,    64,    64,    59,    59,
+      59,    59,    43,   -74,   -74,   -74,   -74,   -74,   -74,   -74,
+     -74,   -74,   -74,   -74,   -74,   -74,    44,   -74,    25,     4,
+      43,   -74
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -618,28 +663,34 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       7,    38,    34,    35,    36,    37,     0,     2,     3,     5,
-       0,     0,     1,     4,     6,    14,     0,    39,     0,    33,
-      13,     8,     9,    10,    12,    11,     0,    16,     0,    31,
-      29,    30,    32,     0,     0,     0,     0,    15,     0,     0,
+       9,    60,    56,    57,    58,    59,    49,     0,     2,     3,
+       5,     7,     0,     0,     0,     1,     4,     6,     8,    47,
+       0,    16,     0,    61,     0,    10,    11,    12,    14,    13,
+       0,     0,     0,    55,    15,     0,    18,     0,    42,    43,
+      45,     0,     0,     0,     0,    48,     0,    44,     0,     0,
+       0,     0,    53,    51,    52,    54,     0,     0,     0,     0,
+      17,     0,     0,     0,     0,     0,     0,     0,     0,    37,
+      38,    39,    40,    41,     9,    33,    34,    35,    36,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,    21,
-      22,    23,    24,    17,    18,    19,    20,    25,    26,    27,
-      28
+       0,     0,     0,    23,    24,    25,    26,    19,    20,    21,
+      22,    27,    28,    29,    30,    46,    31,    50,     0,     9,
+       0,    32
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -26,   -26,    -6,    16,   -26,    -3,    44,   -15,   -14,   -11,
-     -10,   -25,   -26,     0,   -26
+     -74,   -73,    28,   -16,   -74,    56,    40,   -74,   -74,    -3,
+      75,    76,   -74,    77,    -4,   -74,   -74,   -74,   -74,   -22,
+     -21,   -18,   -17,   -35,   -74,     9,    80
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     6,     7,    50,     8,     9,    27,    38,    39,    40,
-      41,    20,    10,    28,    18
+      -1,     7,     8,    83,     9,    10,    36,    11,    31,    74,
+      41,    42,    50,    43,   106,    20,    46,    12,   108,    61,
+      62,    63,    64,    34,    13,    14,    24
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -647,60 +698,76 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      11,    37,    13,    14,    12,    19,     1,    15,    11,    11,
-      16,    33,    34,    42,    43,    35,    36,    44,    45,    17,
-      17,    59,    60,    61,    62,    19,    63,    64,    65,    66,
-      67,    68,    69,    70,    26,    33,    34,     0,     0,    35,
-      36,     0,    55,    56,    57,    58,    19,     0,     0,    46,
-      47,    48,    49,     0,     1,     0,    29,    30,    31,    32,
-      21,    22,    23,    24,    25,     1,     0,     2,     3,     4,
-       5,     0,    21,    22,    23,    24,    25,     0,    29,    30,
-      31,    32,    51,    52,    53,    54
+      60,    92,    15,     1,    30,    23,    19,     1,    35,     2,
+       3,     4,     5,    56,    57,    65,    66,    58,    59,    67,
+      68,    33,    22,     6,    23,    69,    70,    71,    72,    32,
+      45,    38,    39,    37,    40,    23,   110,    16,    17,    18,
+      79,    80,    81,    82,    93,    94,    95,    96,    73,    97,
+      98,    99,   100,   101,   102,   103,   104,    75,    76,    77,
+      78,    56,    57,    33,   107,    58,    59,   105,    33,    21,
+      37,    37,    37,    37,    88,    89,    90,    91,    52,    53,
+      54,    55,     1,    25,    26,    27,    28,    29,    25,    26,
+      27,    28,    29,    38,    39,    47,    40,    52,    53,    54,
+      55,    84,    85,    86,    87,   109,   111,    48,    49,    51,
+      44
 };
 
 static const yytype_int8 yycheck[] =
 {
-       0,    26,     8,     9,     0,     4,     3,    10,     8,     9,
-      10,    26,    26,    28,    28,    26,    26,    28,    28,    18,
-      18,    46,    47,    48,    49,     4,    51,    52,    53,    54,
-      55,    56,    57,    58,    18,    50,    50,    -1,    -1,    50,
-      50,    -1,    42,    43,    44,    45,     4,    -1,    -1,    33,
-      34,    35,    36,    -1,     3,    -1,    14,    15,    16,    17,
-       9,    10,    11,    12,    13,     3,    -1,     5,     6,     7,
-       8,    -1,     9,    10,    11,    12,    13,    -1,    14,    15,
-      16,    17,    38,    39,    40,    41
+      35,    74,     0,     3,    20,    18,    21,     3,    24,     5,
+       6,     7,     8,    35,    35,    37,    37,    35,    35,    37,
+      37,     4,    13,    19,    18,    41,    42,    43,    44,    20,
+      22,    25,    26,    24,    28,    18,   109,     9,    10,    11,
+      56,    57,    58,    59,    79,    80,    81,    82,    23,    84,
+      85,    86,    87,    88,    89,    90,    91,    48,    49,    50,
+      51,    83,    83,     4,    20,    83,    83,    24,     4,    13,
+      61,    62,    63,    64,    65,    66,    67,    68,    14,    15,
+      16,    17,     3,     9,    10,    11,    12,    13,     9,    10,
+      11,    12,    13,    25,    26,    27,    28,    14,    15,    16,
+      17,    61,    62,    63,    64,   108,   110,    32,    32,    32,
+      30
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,     5,     6,     7,     8,    20,    21,    23,    24,
-      31,    32,     0,    21,    21,    24,    32,    18,    33,     4,
-      30,     9,    10,    11,    12,    13,    22,    25,    32,    14,
-      15,    16,    17,    26,    27,    28,    29,    30,    26,    27,
-      28,    29,    26,    27,    28,    29,    22,    22,    22,    22,
-      22,    25,    25,    25,    25,    32,    32,    32,    32,    30,
-      30,    30,    30,    30,    30,    30,    30,    30,    30,    30,
-      30
+       0,     3,     5,     6,     7,     8,    19,    30,    31,    33,
+      34,    36,    46,    53,    54,     0,    31,    31,    31,    21,
+      44,    34,    54,    18,    55,     9,    10,    11,    12,    13,
+      32,    37,    54,     4,    52,    32,    35,    54,    25,    26,
+      28,    39,    40,    42,    55,    22,    45,    27,    39,    40,
+      41,    42,    14,    15,    16,    17,    48,    49,    50,    51,
+      52,    48,    49,    50,    51,    48,    49,    50,    51,    32,
+      32,    32,    32,    23,    38,    54,    54,    54,    54,    32,
+      32,    32,    32,    32,    35,    35,    35,    35,    54,    54,
+      54,    54,    30,    52,    52,    52,    52,    52,    52,    52,
+      52,    52,    52,    52,    52,    24,    43,    20,    47,    38,
+      30,    43
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    19,    20,    21,    21,    21,    21,    21,    22,    22,
-      22,    22,    22,    23,    23,    24,    24,    25,    25,    25,
-      25,    25,    25,    25,    25,    25,    25,    25,    25,    26,
-      27,    28,    29,    30,    31,    31,    31,    31,    32,    33
+       0,    29,    30,    31,    31,    31,    31,    31,    31,    31,
+      32,    32,    32,    32,    32,    33,    33,    34,    34,    35,
+      35,    35,    35,    35,    35,    35,    35,    35,    35,    35,
+      35,    36,    36,    37,    37,    37,    37,    37,    37,    37,
+      37,    38,    39,    40,    41,    42,    43,    44,    45,    46,
+      47,    48,    49,    50,    51,    52,    53,    53,    53,    53,
+      54,    55
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     1,     2,     1,     2,     0,     1,     1,
-       1,     1,     1,     3,     2,     4,     3,     4,     4,     4,
-       4,     4,     4,     4,     4,     4,     4,     4,     4,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     1,     1
+       0,     2,     1,     1,     2,     1,     2,     1,     2,     0,
+       1,     1,     1,     1,     1,     3,     2,     4,     3,     4,
+       4,     4,     4,     4,     4,     4,     4,     4,     4,     4,
+       4,     7,    11,     3,     3,     3,     3,     3,     3,     3,
+       3,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1
 };
 
 
@@ -1491,344 +1558,542 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 97 "compilador.y"
+#line 117 "compilador.y"
 {
 	(yyval.node) = create_node((yylsp[0]).first_line, code_node, NULL , (yyvsp[0].node), NULL);
 	syntax_tree = (yyval.node); 
 }
-#line 1500 "compilador.tab.c"
+#line 1567 "compilador.tab.c"
     break;
 
   case 3:
-#line 104 "compilador.y"
+#line 124 "compilador.y"
         {
 		printf("DECLARACAO FINAL\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, acao_node, "declaracao", (yyvsp[0].node), NULL);
 	}
-#line 1509 "compilador.tab.c"
+#line 1576 "compilador.tab.c"
     break;
 
   case 4:
-#line 108 "compilador.y"
+#line 128 "compilador.y"
                          {
 		printf("DECLARACAO  ACAO\n");
 		(yyval.node) = create_node((yylsp[-1]).first_line, acao_node, "declaracao", (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1518 "compilador.tab.c"
+#line 1585 "compilador.tab.c"
     break;
 
   case 5:
-#line 112 "compilador.y"
+#line 132 "compilador.y"
                     {
 		printf("ATRIBUICAO FINAL\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, acao_node, "atribuicao", (yyvsp[0].node), NULL);	
 	}
-#line 1527 "compilador.tab.c"
+#line 1594 "compilador.tab.c"
     break;
 
   case 6:
-#line 116 "compilador.y"
+#line 136 "compilador.y"
                          {
 		printf("ATRIBUICAO ACAO\n");
 		(yyval.node) = create_node((yylsp[-1]).first_line, acao_node, "atribuicao", (yyvsp[-1].node), (yyvsp[0].node),  NULL);
 	}
-#line 1536 "compilador.tab.c"
+#line 1603 "compilador.tab.c"
     break;
 
   case 7:
-#line 120 "compilador.y"
-          {}
-#line 1542 "compilador.tab.c"
+#line 140 "compilador.y"
+                  {
+		printf("CONDICAO FINAL\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, condicao_node, "condicao", (yyvsp[0].node), NULL);	
+	}
+#line 1612 "compilador.tab.c"
     break;
 
   case 8:
-#line 123 "compilador.y"
-                       { printf("RECONHECENDO VALOR INTEIRO\n");
-		(yyval.node) = create_node((yylsp[0]).first_line, int_valor_node, "int_valor", NULL);
+#line 144 "compilador.y"
+                       {
+		printf("CONDICAO ACAO\n");
+		(yyval.node) = create_node((yylsp[-1]).first_line, condicao_node, "condicao", (yyvsp[-1].node), (yyvsp[0].node),  NULL);
 	}
-#line 1550 "compilador.tab.c"
+#line 1621 "compilador.tab.c"
     break;
 
   case 9:
-#line 126 "compilador.y"
-                           { printf("RECONHECENDO VALOR FLOAT\n");
-		(yyval.node) = create_node((yylsp[0]).first_line, float_valor_node, "float_valor", NULL);	
-	}
-#line 1558 "compilador.tab.c"
+#line 148 "compilador.y"
+          {}
+#line 1627 "compilador.tab.c"
     break;
 
   case 10:
-#line 129 "compilador.y"
-                          { printf("RECONHECENDO VALOR CHAR\n");
-		(yyval.node) = create_node((yylsp[0]).first_line, char_valor_node, "char_valor", NULL);
+#line 151 "compilador.y"
+                       { printf("RECONHECENDO VALOR INTEIRO\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, int_valor_node, "int_valor", NULL);
 	}
-#line 1566 "compilador.tab.c"
+#line 1635 "compilador.tab.c"
     break;
 
   case 11:
-#line 132 "compilador.y"
-                            { printf("RECONHECENDO VALOR STRING\n");
-		(yyval.node) = create_node((yylsp[0]).first_line, string_valor_node, "string_valor", NULL);
+#line 154 "compilador.y"
+                           { printf("RECONHECENDO VALOR FLOAT\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, float_valor_node, "float_valor", NULL);	
 	}
-#line 1574 "compilador.tab.c"
+#line 1643 "compilador.tab.c"
     break;
 
   case 12:
-#line 135 "compilador.y"
-                          { printf("RECONHECENDO VALOR BOOL\n");
-		(yyval.node) = create_node((yylsp[0]).first_line, bool_valor_node, "bool_valor", NULL);	
+#line 157 "compilador.y"
+                          { printf("RECONHECENDO VALOR CHAR\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, char_valor_node, "char_valor", NULL);
 	}
-#line 1582 "compilador.tab.c"
+#line 1651 "compilador.tab.c"
     break;
 
   case 13:
-#line 141 "compilador.y"
+#line 160 "compilador.y"
+                            { printf("RECONHECENDO VALOR STRING\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, string_valor_node, "string_valor", NULL);
+	}
+#line 1659 "compilador.tab.c"
+    break;
+
+  case 14:
+#line 163 "compilador.y"
+                          { printf("RECONHECENDO VALOR BOOL\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, bool_valor_node, "bool_valor", NULL);	
+	}
+#line 1667 "compilador.tab.c"
+    break;
+
+  case 15:
+#line 169 "compilador.y"
                                     { 
 		printf("RECONHECENDO DECLARACAO\n");
 		(yyval.node) = create_node((yylsp[-2]).first_line, declaracao_node, "declaracao", (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL); 
 	}
-#line 1591 "compilador.tab.c"
+#line 1676 "compilador.tab.c"
     break;
 
-  case 14:
-#line 145 "compilador.y"
+  case 16:
+#line 173 "compilador.y"
                          { 
 		printf("RECONHECENDO DECLARACAO INICIALIZANDO\n"); 
 		(yyval.node) = create_node((yylsp[-1]).first_line, atribuicao_node, "atribuicao", (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1600 "compilador.tab.c"
+#line 1685 "compilador.tab.c"
     break;
 
-  case 15:
-#line 151 "compilador.y"
+  case 17:
+#line 179 "compilador.y"
                                              { 
 		printf("RECONHECENDO ATRIBUICAO VALOR\n");
-		(yyval.node) = create_node((yylsp[-3]).first_line, atribuicao_node, "atribuicao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), NULL);	
+		(yyval.node) = create_node((yylsp[-3]).first_line, atribuicao_node, "atribuicao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);	
 	}
-#line 1609 "compilador.tab.c"
+#line 1694 "compilador.tab.c"
     break;
 
-  case 16:
-#line 155 "compilador.y"
+  case 18:
+#line 183 "compilador.y"
                                     {
 		printf("RECONHECENDO ATRIBUICAO EXPRESSAO\n");
 		(yyval.node) = create_node((yylsp[-2]).first_line, atribuicao_node, "atribuicao", (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	
 	}
-#line 1619 "compilador.tab.c"
-    break;
-
-  case 17:
-#line 162 "compilador.y"
-                                              {
-		printf("RECONHECENDO EXPRESSAO SOMA");	
-		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
-	}
-#line 1628 "compilador.tab.c"
-    break;
-
-  case 18:
-#line 166 "compilador.y"
-                                                   {
-		printf("RECONHECENDO EXPRESSAO SUBTRACAO");
-		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
-	}
-#line 1637 "compilador.tab.c"
+#line 1704 "compilador.tab.c"
     break;
 
   case 19:
-#line 170 "compilador.y"
-                                                   {
-		printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");
+#line 190 "compilador.y"
+                                              {
+		printf("RECONHECENDO EXPRESSAO SOMA\n");	
 		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1646 "compilador.tab.c"
+#line 1713 "compilador.tab.c"
     break;
 
   case 20:
-#line 174 "compilador.y"
-                                                       {
-		printf("RECONHECENDO EXPRESSAO DIVISAO");
+#line 194 "compilador.y"
+                                                   {
+		printf("RECONHECENDO EXPRESSAO SUBTRACAO\n");
 		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1655 "compilador.tab.c"
+#line 1722 "compilador.tab.c"
     break;
 
   case 21:
-#line 178 "compilador.y"
-                                          {
-		printf("RECONHECENDO EXPRESSAO SOMA");
+#line 198 "compilador.y"
+                                                   {
+		printf("RECONHECENDO EXPRESSAO MULTIPLICACAO\n");
 		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1664 "compilador.tab.c"
+#line 1731 "compilador.tab.c"
     break;
 
   case 22:
-#line 182 "compilador.y"
-                                           {
-		printf("RECONHECENDO EXPRESSAO SUBTRACAO");
+#line 202 "compilador.y"
+                                                       {
+		printf("RECONHECENDO EXPRESSAO DIVISAO\n");
 		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1673 "compilador.tab.c"
+#line 1740 "compilador.tab.c"
     break;
 
   case 23:
-#line 186 "compilador.y"
-                                           {
-		printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");
+#line 206 "compilador.y"
+                                          {
+		printf("RECONHECENDO EXPRESSAO SOMA\n");
 		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1682 "compilador.tab.c"
+#line 1749 "compilador.tab.c"
     break;
 
   case 24:
-#line 190 "compilador.y"
-                                              {
-		printf("RECONHECENDO EXPRESSAO DIVISAO");
+#line 210 "compilador.y"
+                                           {
+		printf("RECONHECENDO EXPRESSAO SUBTRACAO\n");
 		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1691 "compilador.tab.c"
+#line 1758 "compilador.tab.c"
     break;
 
   case 25:
-#line 194 "compilador.y"
-                                                {
-		printf("RECONHECENDO EXPRESSAO SOMA");
+#line 214 "compilador.y"
+                                           {
+		printf("RECONHECENDO EXPRESSAO MULTIPLICACAO\n");
 		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1700 "compilador.tab.c"
+#line 1767 "compilador.tab.c"
     break;
 
   case 26:
-#line 198 "compilador.y"
-                                                 {
-		printf("RECONHECENDO EXPRESSAO SUBTRACAO");
+#line 218 "compilador.y"
+                                              {
+		printf("RECONHECENDO EXPRESSAO DIVISAO\n");
 		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1709 "compilador.tab.c"
+#line 1776 "compilador.tab.c"
     break;
 
   case 27:
-#line 202 "compilador.y"
-                                                 {
-		printf("RECONHECENDO EXPRESSAO MULTIPLICACAO");
+#line 222 "compilador.y"
+                                                {
+		printf("RECONHECENDO EXPRESSAO SOMA\n");
 		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
-		
 	}
-#line 1719 "compilador.tab.c"
+#line 1785 "compilador.tab.c"
     break;
 
   case 28:
-#line 207 "compilador.y"
-                                                    {
-		printf("RECONHECENDO EXPRESSAO DIVISAO");
+#line 226 "compilador.y"
+                                                 {
+		printf("RECONHECENDO EXPRESSAO SUBTRACAO\n");
 		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
 	}
-#line 1728 "compilador.tab.c"
+#line 1794 "compilador.tab.c"
     break;
 
   case 29:
-#line 213 "compilador.y"
+#line 230 "compilador.y"
+                                                 {
+		printf("RECONHECENDO EXPRESSAO MULTIPLICACAO\n");
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+		
+	}
+#line 1804 "compilador.tab.c"
+    break;
+
+  case 30:
+#line 235 "compilador.y"
+                                                    {
+		printf("RECONHECENDO EXPRESSAO DIVISAO\n");
+		(yyval.node) = create_node((yylsp[-3]).first_line, expressao_node, "expressao", (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+	}
+#line 1813 "compilador.tab.c"
+    break;
+
+  case 31:
+#line 241 "compilador.y"
+                                                                                               {
+			printf("RECONHECENDO CONDICAO IF");
+			(yyval.node) = create_node((yylsp[-6]).first_line, condicao_node, "condicao", (yyvsp[-6].node), (yyvsp[-5].node), (yyvsp[-4].node), (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+		}
+#line 1822 "compilador.tab.c"
+    break;
+
+  case 32:
+#line 246 "compilador.y"
+                                                                                                                                  {
+			printf("RECONHECENDO CONDICAO IF ELSE\n");
+			(yyval.node) = create_node((yylsp[-10]).first_line, condicao_node, "condicao", (yyvsp[-10].node), (yyvsp[-9].node), (yyvsp[-8].node), (yyvsp[-7].node), (yyvsp[-6].node), (yyvsp[-5].node), (yyvsp[-4].node), (yyvsp[-3].node), (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+		}
+#line 1831 "compilador.tab.c"
+    break;
+
+  case 33:
+#line 254 "compilador.y"
+                                       {
+		printf("RECONHECENDO COMPARACAO\n");
+		(yyval.node) = create_node((yylsp[-2]).first_line, comparacao_node, "comparacao", (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+	}
+#line 1840 "compilador.tab.c"
+    break;
+
+  case 34:
+#line 259 "compilador.y"
+                                       {
+		printf("RECONHECENDO COMPARACAO\n");
+		(yyval.node) = create_node((yylsp[-2]).first_line, comparacao_node, "comparacao", (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+	}
+#line 1849 "compilador.tab.c"
+    break;
+
+  case 35:
+#line 264 "compilador.y"
+                                             {
+		printf("RECONHECENDO COMPARACAO\n");
+		(yyval.node) = create_node((yylsp[-2]).first_line, comparacao_node, "comparacao", (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+	}
+#line 1858 "compilador.tab.c"
+    break;
+
+  case 36:
+#line 269 "compilador.y"
+                                           {
+		printf("RECONHECENDO COMPARACAO\n");
+		(yyval.node) = create_node((yylsp[-2]).first_line, comparacao_node, "comparacao", (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+	}
+#line 1867 "compilador.tab.c"
+    break;
+
+  case 37:
+#line 274 "compilador.y"
+                                 {
+		printf("RECONHECENDO COMPARACAO\n");
+		(yyval.node) = create_node((yylsp[-2]).first_line, comparacao_node, "comparacao", (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+	}
+#line 1876 "compilador.tab.c"
+    break;
+
+  case 38:
+#line 279 "compilador.y"
+                                 {
+		printf("RECONHECENDO COMPARACAO\n");
+		(yyval.node) = create_node((yylsp[-2]).first_line, comparacao_node, "comparacao", (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+	}
+#line 1885 "compilador.tab.c"
+    break;
+
+  case 39:
+#line 284 "compilador.y"
+                                     {
+		printf("RECONHECENDO COMPARACAO\n");
+		(yyval.node) = create_node((yylsp[-2]).first_line, comparacao_node, "comparacao", (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+	}
+#line 1894 "compilador.tab.c"
+    break;
+
+  case 40:
+#line 289 "compilador.y"
+                         {
+		printf("RECONHECENDO COMPARACAO\n");
+		(yyval.node) = create_node((yylsp[-2]).first_line, comparacao_node, "comparacao", (yyvsp[-2].node), (yyvsp[-1].node), (yyvsp[0].node), NULL);
+	}
+#line 1903 "compilador.tab.c"
+    break;
+
+  case 41:
+#line 295 "compilador.y"
+                         {
+		printf("RECONHECENDO ABRE_CHAVES\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, abre_chaves_node, "abre_chaves", NULL);
+}
+#line 1912 "compilador.tab.c"
+    break;
+
+  case 42:
+#line 301 "compilador.y"
+                   {
+		printf("RECONHECENDO MAIOR\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, maior_node, "maior", NULL);
+}
+#line 1921 "compilador.tab.c"
+    break;
+
+  case 43:
+#line 307 "compilador.y"
+                   {
+		printf("RECONHECENDO MENOR\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, menor_node, "menor", NULL);
+}
+#line 1930 "compilador.tab.c"
+    break;
+
+  case 44:
+#line 313 "compilador.y"
+                         {
+		printf("RECONHECENDO IGUAL_IGUAL\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, igual_igual_node, "igual_igual", NULL);
+}
+#line 1939 "compilador.tab.c"
+    break;
+
+  case 45:
+#line 319 "compilador.y"
+                       {
+		printf("RECONHECENDO DIFERENTE\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, diferente_node, "diferente", NULL);
+}
+#line 1948 "compilador.tab.c"
+    break;
+
+  case 46:
+#line 325 "compilador.y"
+                          {
+		printf("RECONHECENDO FECHA_CHAVES\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, fecha_chaves_node, "fecha_chaves", NULL);
+}
+#line 1957 "compilador.tab.c"
+    break;
+
+  case 47:
+#line 331 "compilador.y"
+                             {
+		printf("RECONHECENDO ABRE_PARENTESES\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, abre_parenteses_node, "abre_parenteses", NULL);
+}
+#line 1966 "compilador.tab.c"
+    break;
+
+  case 48:
+#line 337 "compilador.y"
+                              {
+		printf("RECONHECENDO FECHA_PARENTESES\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, fecha_parenteses_node, "fecha_parenteses", NULL);
+}
+#line 1975 "compilador.tab.c"
+    break;
+
+  case 49:
+#line 343 "compilador.y"
+                {
+		printf("RECONHECENDO IF\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, if_node, "if", NULL);
+}
+#line 1984 "compilador.tab.c"
+    break;
+
+  case 50:
+#line 348 "compilador.y"
+                  {
+		printf("RECONHECENDO ELSE\n");
+		(yyval.node) = create_node((yylsp[0]).first_line, else_node, "else", NULL);
+}
+#line 1993 "compilador.tab.c"
+    break;
+
+  case 51:
+#line 353 "compilador.y"
                   {
 		printf("RECONHECENDO SOMA\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, soma_node, "soma", NULL);
 }
-#line 1737 "compilador.tab.c"
+#line 2002 "compilador.tab.c"
     break;
 
-  case 30:
-#line 218 "compilador.y"
+  case 52:
+#line 358 "compilador.y"
                        {
 		printf("RECONHECENDO SUBTRACAO\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, subtracao_node, "subtracao", NULL);
 
 }
-#line 1747 "compilador.tab.c"
+#line 2012 "compilador.tab.c"
     break;
 
-  case 31:
-#line 224 "compilador.y"
+  case 53:
+#line 364 "compilador.y"
                            {
 		printf("RECONHECENDO MULTIPLICACAO\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, multiplicacao_node, "multiplicacao", NULL);
 	}
-#line 1756 "compilador.tab.c"
+#line 2021 "compilador.tab.c"
     break;
 
-  case 32:
-#line 229 "compilador.y"
+  case 54:
+#line 369 "compilador.y"
                      {
 		printf("RECONHECENDO DIVISAO\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, divisao_node, "divisao", NULL);		
 	}
-#line 1765 "compilador.tab.c"
+#line 2030 "compilador.tab.c"
     break;
 
-  case 33:
-#line 236 "compilador.y"
+  case 55:
+#line 376 "compilador.y"
                            {
 		printf("RECONHECENDO PONTO E VIRGULA\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, ponto_virgula_node, "ponto_virgula", NULL);	
 	}
-#line 1774 "compilador.tab.c"
+#line 2039 "compilador.tab.c"
     break;
 
-  case 34:
-#line 242 "compilador.y"
+  case 56:
+#line 382 "compilador.y"
                        {
 		printf("RECONHECENDO TIPO INT\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, int_tipo_node, "int", NULL);	
 	}
-#line 1783 "compilador.tab.c"
+#line 2048 "compilador.tab.c"
     break;
 
-  case 35:
-#line 246 "compilador.y"
+  case 57:
+#line 386 "compilador.y"
                            {
 		printf("RECONHECENDO TIPO FLOAT\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, float_tipo_node, "float", NULL);	
 	}
-#line 1792 "compilador.tab.c"
+#line 2057 "compilador.tab.c"
     break;
 
-  case 36:
-#line 250 "compilador.y"
+  case 58:
+#line 390 "compilador.y"
                           {
 		printf("RECONHECENDO TIPO CHAR\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, char_tipo_node, "char", NULL);	
 	}
-#line 1801 "compilador.tab.c"
+#line 2066 "compilador.tab.c"
     break;
 
-  case 37:
-#line 254 "compilador.y"
+  case 59:
+#line 394 "compilador.y"
                           {
 		printf("RECONHECENDO TIPO BOOL\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, bool_tipo_node, "bool", NULL);	
 	}
-#line 1810 "compilador.tab.c"
+#line 2075 "compilador.tab.c"
     break;
 
-  case 38:
-#line 260 "compilador.y"
+  case 60:
+#line 400 "compilador.y"
                       {
 		printf("RECONHECENDO VARIAVEL\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, variavel_node, "variavel", NULL);	
 	}
-#line 1819 "compilador.tab.c"
+#line 2084 "compilador.tab.c"
     break;
 
-  case 39:
-#line 266 "compilador.y"
+  case 61:
+#line 406 "compilador.y"
                    {
 		printf("RECONHECENDO IGUAL\n");
 		(yyval.node) = create_node((yylsp[0]).first_line, igual_node, "igual", NULL);	
 	}
-#line 1828 "compilador.tab.c"
+#line 2093 "compilador.tab.c"
     break;
 
 
-#line 1832 "compilador.tab.c"
+#line 2097 "compilador.tab.c"
 
       default: break;
     }
@@ -2066,5 +2331,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 273 "compilador.y"
+#line 413 "compilador.y"
 

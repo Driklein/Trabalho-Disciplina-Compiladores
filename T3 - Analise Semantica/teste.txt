@@ -1,8 +1,14 @@
+
 float x;
-x = 52.4;
-float y = 22.3;
+float y = 5.2;
+x = 2.9;
 float z = x + y;
-z = z + x;
 
+x = 29.3 / 4.2;
 
-
+if (x < y) {
+	x = x + y;
+}
+else{
+	y = x + y;
+}

@@ -64,7 +64,17 @@ extern int yydebug;
     SOMA_TOKEN = 286,
     SUBTRACAO_TOKEN = 287,
     DIVISAO_TOKEN = 288,
-    IGUAL_TOKEN = 290
+    IGUAL_TOKEN = 290,
+    IF_TOKEN = 522,
+    ELSE_TOKEN = 524,
+    ABRE_PARENTESES_TOKEN = 525,
+    FECHA_PARENTESES_TOKEN = 526,
+    ABRE_CHAVES_TOKEN = 527,
+    FECHA_CHAVES_TOKEN = 528,
+    MAIOR_TOKEN = 529,
+    MENOR_TOKEN = 530,
+    IGUAL_IGUAL_TOKEN = 531,
+    DIFERENTE_TOKEN = 532
   };
 #endif
 
@@ -77,7 +87,7 @@ union YYSTYPE
 	char* cadeia;
 	struct _node * node;
 
-#line 81 "compilador.tab.h"
+#line 91 "compilador.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

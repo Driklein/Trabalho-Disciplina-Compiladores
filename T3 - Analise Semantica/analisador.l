@@ -25,53 +25,170 @@ ESPACOS {ESPACO}[\t][\n]
 
 %%
 
-int {return(INT_TIPO);}
-float {return(FLOAT_TIPO);}
-char {return(CHAR_TIPO);}
-bool {return(BOOL_TIPO);}
+int {
+    yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(INT_TIPO);}
+float {
+    yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(FLOAT_TIPO);}
+char {
+    yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(CHAR_TIPO);}
+bool {
+    yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(BOOL_TIPO);}
 
-if {return(IF);}
-else {return(ELSE);}
-while {return(WHILE);}
-for {return(FOR);}
-printf {return(PRINTF);}
+if {
+    yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(IF);}
+else {
+    yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(ELSE);}
+while {
+    yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(WHILE);}
+for {
+    yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(FOR);}
+printf {
+    yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(PRINTF);}
 
 main {return(MAIN);}
-return {return(RETURN);}
-stdio.h {return(BIBLIOTECA);}
-#include {return(INCLUDE);}
+return {
+    yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(RETURN);}
+stdio.h {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(BIBLIOTECA);}
+#include {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(INCLUDE);}
 
-"{" {return(ABRE_CHAVES);}
-"}" {return(FECHA_CHAVES);}
-"(" {return(ABRE_PARENTESES);}
-")" {return(FECHA_PARENTESES);}
-"[" {return(ABRE_COLCHETES);}
-"]" {return(FECHA_COLCHETES);}
-"." {return(PONTO);}
-"," {return(VIRGULA);}
-";" {return(PONTO_VIRGULA);}
-ASPA {return(ASPA);}
+"{" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(ABRE_CHAVES);}
+"}" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(FECHA_CHAVES);}
+"(" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(ABRE_PARENTESES);}
+")" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(FECHA_PARENTESES);}
+"[" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(ABRE_COLCHETES);}
+"]" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(FECHA_COLCHETES);}
+"." {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(PONTO);}
+"," {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(VIRGULA);}
+";" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(PONTO_VIRGULA);}
+ASPA {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(ASPA);}
 
 
-"*" {return(MULTIPLICACAO);}
-"+" {return(SOMA);}
-"-" {return(SUBTRACAO);}
-"/" {return(DIVISAO);}
-"%" {return(PORCENTAGEM);}
-"=" {return(IGUAL);}
-"==" {return(IGUAL_IGUAL);}
-"!=" {return(DIFERENTE);}
-"!" {return(NEGACAO);}
-">" {return(MAIOR);}
-"<" {return(MENOR);}
-">=" {return(MAIOR_IGUAL);}
-"<=" {return(MENOR_IGUAL);}
-"&&" {return(AND);}
-"||" {return(OR);}
+"*" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(MULTIPLICACAO);}
+"+" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(SOMA);}
+"-" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(SUBTRACAO);}
+"/" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(DIVISAO);}
+"%" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(PORCENTAGEM);}
+"=" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(IGUAL);}
+"==" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(IGUAL_IGUAL);}
+"!=" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(DIFERENTE);}
+"!" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(NEGACAO);}
+">" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(MAIOR);}
+"<" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(MENOR);}
+">=" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(MAIOR_IGUAL);}
+"<=" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(MENOR_IGUAL);}
+"&&" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(AND);}
+"||" {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(OR);}
 
 
-{DIGITO} {return(DIGITO);}
-{VARIAVEL} {return(VARIAVEL);}
+{DIGITO} {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(DIGITO);}
+{VARIAVEL} {
+  yylval.cadeia = (char*)malloc((strlen(yytext)+1)*sizeof(char));
+  strcpy(yylval.cadeia, yytext);
+  return(VARIAVEL);}
 {ESPACOS} {}
 
 {INT_VALOR} {

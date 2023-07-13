@@ -1,5 +1,4 @@
-#define IF  265
-#define ELSE  266
+
 #define WHILE  267
 #define FOR  268
 #define PRINTF  269
@@ -10,10 +9,6 @@
 #define INCLUDE 273
 #define VARIAVEL 274
 
-#define ABRE_CHAVES 275
-#define FECHA_CHAVES 276
-#define ABRE_PARENTESES 277
-#define FECHA_PARENTESES 278
 #define ABRE_COLCHETES 279
 #define FECHA_COLCHETES 280
 #define PONTO 281
@@ -26,11 +21,7 @@
 #define DIVISAO 288
 #define PORCENTAGEM 289
 #define IGUAL 290
-#define IGUAL_IGUAL 291
-#define DIFERENTE 292
 #define NEGACAO 293
-#define MAIOR 294
-#define MENOR 295
 #define MAIOR_IGUAL 296
 #define MENOR_IGUAL 297
 #define AND 298
@@ -47,3 +38,13 @@
 #define CHAR_VALOR 316
 #define BOOL_VALOR 317
 #define STRING_VALOR 318
+#define IF 522
+#define ELSE 524
+#define ABRE_PARENTESES 525
+#define FECHA_PARENTESES 526
+#define ABRE_CHAVES 527
+#define FECHA_CHAVES 528
+#define MAIOR 529
+#define MENOR 530
+#define IGUAL_IGUAL 531
+#define DIFERENTE 532
